@@ -1,0 +1,1205 @@
+{
+ "schema_version": 2,
+ "specification_revision": "2.3",
+ "interpretation_profile": "P1",
+ "interpretation_rules": "waif",
+ "validation_profile": "evidence_pending",
+ "meta": {
+  "title": "THE WAIF \u2014 Ben's Story",
+  "subtitle": "Canon topology fixture; screenplay locators pending",
+  "footer": "Universe identity is separate from consciousness and character fate.",
+  "axis": "story_order"
+ },
+ "sources": [
+  {
+   "id": "canon",
+   "title": "Author-supplied THE WAIF canon",
+   "kind": "canon_statement",
+   "text": "Every trigger pull automatically splits. No rewind. Joined worlds already existed. The Waif dies in U1 at the jump. The later Waif is not native to the encountered universe. Ben's route is U1 -> J+ -> *2 -> J- -> *F. Death tines fork right. Beats require page and scene evidence. Other graphs have separate namespaces."
+  },
+  {
+   "id": "allocation",
+   "title": "Explicit structural test allocations",
+   "kind": "test_fixture",
+   "text": "For this topology test: J births J+ and J-. T is in J+; M is in *2; C is in J-. T+, M+, and C+ preserve their source identities. W1 and W2 are separate Waif transfers through WU1, *W2, and *W3. These allocations are not screenplay citations."
+  }
+ ],
+ "characters": [
+  {
+   "id": "ben",
+   "label": "Ben"
+  },
+  {
+   "id": "waif",
+   "label": "The Waif"
+  }
+ ],
+ "travellers": [
+  {
+   "id": "ben-mind",
+   "character": "ben",
+   "label": "Ben",
+   "color": [
+    38,
+    118,
+    62
+   ]
+  },
+  {
+   "id": "waif-mind",
+   "character": "waif",
+   "label": "The Waif",
+   "color": [
+    70,
+    90,
+    150
+   ]
+  }
+ ],
+ "namespaces": [
+  {
+   "id": "BEN",
+   "label": "Ben's Story"
+  },
+  {
+   "id": "W",
+   "label": "The Waif's jumps"
+  },
+  {
+   "id": "B",
+   "label": "Before-lives; reserved for a separate graph"
+  }
+ ],
+ "graphs": [
+  {
+   "namespace": "BEN",
+   "title": "Ben's Story",
+   "universes": [
+    {
+     "id": "U1",
+     "label": "The initial timeline",
+     "origin": {
+      "kind": "initial"
+     }
+    },
+    {
+     "id": "J+",
+     "label": "Jack lives \u2014 the line we follow",
+     "origin": {
+      "kind": "born",
+      "event": "e-J",
+      "parent": "U1",
+      "tine": "+"
+     }
+    },
+    {
+     "id": "J-",
+     "label": "Jack dies \u2014 runs on without him",
+     "origin": {
+      "kind": "born",
+      "event": "e-J",
+      "parent": "U1",
+      "tine": "-"
+     }
+    },
+    {
+     "id": "T-",
+     "label": "The trigger, before she arrives \u2014 he dies",
+     "origin": {
+      "kind": "born",
+      "event": "e-T",
+      "parent": "J+",
+      "tine": "-"
+     }
+    },
+    {
+     "id": "*2",
+     "label": "THE TIMELINE WITH HER",
+     "origin": {
+      "kind": "preexisting",
+      "ancestry": "off_chart"
+     }
+    },
+    {
+     "id": "M-",
+     "label": "The Mother \u2014 he dies",
+     "origin": {
+      "kind": "born",
+      "event": "e-M",
+      "parent": "*2",
+      "tine": "-"
+     }
+    },
+    {
+     "id": "C-",
+     "label": "The cabin \u2014 that world's Ben dies",
+     "origin": {
+      "kind": "born",
+      "event": "e-C",
+      "parent": "J-",
+      "tine": "-"
+     }
+    },
+    {
+     "id": "*F",
+     "label": "The family world \u2014 cruel Ben (implied)",
+     "origin": {
+      "kind": "preexisting",
+      "ancestry": "off_chart"
+     }
+    }
+   ],
+   "instances": [
+    {
+     "id": "ben-u1",
+     "character": "ben",
+     "universe": "U1",
+     "native_to_universe": true,
+     "provenance": "native",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-jp",
+     "character": "ben",
+     "universe": "J+",
+     "native_to_universe": true,
+     "provenance": "split_counterpart",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-tm",
+     "character": "ben",
+     "universe": "T-",
+     "native_to_universe": true,
+     "provenance": "split_counterpart",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-jm-native",
+     "character": "ben",
+     "universe": "J-",
+     "native_to_universe": true,
+     "provenance": "native",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-2v",
+     "character": "ben",
+     "universe": "*2",
+     "native_to_universe": false,
+     "provenance": "arrival"
+    },
+    {
+     "id": "ben-mm",
+     "character": "ben",
+     "universe": "M-",
+     "native_to_universe": true,
+     "provenance": "split_counterpart",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-jmv",
+     "character": "ben",
+     "universe": "J-",
+     "native_to_universe": false,
+     "provenance": "arrival"
+    },
+    {
+     "id": "ben-cm",
+     "character": "ben",
+     "universe": "C-",
+     "native_to_universe": true,
+     "provenance": "split_counterpart",
+     "body": "ben-body"
+    },
+    {
+     "id": "ben-fv",
+     "character": "ben",
+     "universe": "*F",
+     "native_to_universe": false,
+     "provenance": "arrival"
+    },
+    {
+     "id": "waif-u1",
+     "character": "waif",
+     "universe": "U1",
+     "native_to_universe": true,
+     "provenance": "native"
+    },
+    {
+     "id": "waif-2",
+     "character": "waif",
+     "universe": "*2",
+     "native_to_universe": true,
+     "provenance": "native"
+    }
+   ],
+   "events": [
+    {
+     "id": "e-start",
+     "kind": "start",
+     "universe": "U1",
+     "story_order": 0,
+     "world_time": null,
+     "label": "The initial timeline",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "Opening state",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-J",
+     "kind": "split",
+     "universe": "U1",
+     "story_order": 10,
+     "world_time": null,
+     "label": "J \u2014 the car crash",
+     "cite": {
+      "source": "canon",
+      "page": "4",
+      "scene": "10",
+      "locator": "Jack dies in car",
+      "status": "resolved"
+     }
+    },
+    {
+     "id": "e-Jp",
+     "kind": "outcome",
+     "universe": "J+",
+     "story_order": 11,
+     "world_time": null,
+     "label": "J+ \u2014 we follow",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "J births J+ and J-",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Jm",
+     "kind": "outcome",
+     "universe": "J-",
+     "story_order": 12,
+     "world_time": null,
+     "label": "J- \u2014 he dies",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "J births J+ and J-",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-T",
+     "kind": "split",
+     "universe": "J+",
+     "story_order": 20,
+     "world_time": null,
+     "label": "T \u2014 the trigger, before she arrives",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "T trigger scene",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Tp",
+     "kind": "outcome",
+     "universe": "GHOST",
+     "story_order": 21,
+     "world_time": null,
+     "label": "J+ continues",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "T+ preserves source identity",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Tm",
+     "kind": "outcome",
+     "universe": "T-",
+     "story_order": 22,
+     "world_time": null,
+     "label": "T- \u2014 she arrives to an empty cabin",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "T- outcome",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-2-in",
+     "kind": "entry",
+     "universe": "*2",
+     "story_order": 30,
+     "world_time": null,
+     "label": "He enters *2 \u2014 already running, she is alive in it",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "First arrival in the timeline with her",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-M",
+     "kind": "split",
+     "universe": "*2",
+     "story_order": 40,
+     "world_time": null,
+     "label": "M \u2014 the Mother",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "M trigger scene",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Mp",
+     "kind": "outcome",
+     "universe": "*2",
+     "story_order": 41,
+     "world_time": null,
+     "label": "*2 continues",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "M+ preserves source identity",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Mm",
+     "kind": "outcome",
+     "universe": "M-",
+     "story_order": 42,
+     "world_time": null,
+     "label": "M- \u2014 he dies",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "M- outcome",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Jm-in",
+     "kind": "entry",
+     "universe": "J-",
+     "story_order": 50,
+     "world_time": null,
+     "label": "He enters J- \u2014 the world where his counterpart died",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "Arrival in J-",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-C",
+     "kind": "split",
+     "universe": "J-",
+     "story_order": 60,
+     "world_time": null,
+     "label": "C \u2014 the cabin",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "C trigger scene",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Cp",
+     "kind": "outcome",
+     "universe": "J-",
+     "story_order": 61,
+     "world_time": null,
+     "label": "J- continues",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "C+ preserves source identity",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-Cm",
+     "kind": "outcome",
+     "universe": "C-",
+     "story_order": 62,
+     "world_time": null,
+     "label": "C- \u2014 that world's Ben dies",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "C- outcome",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-F-in",
+     "kind": "entry",
+     "universe": "*F",
+     "story_order": 70,
+     "world_time": null,
+     "label": "He enters *F",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "Arrival in the family world",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "e-end",
+     "kind": "cutoff",
+     "universe": "*F",
+     "story_order": 80,
+     "world_time": null,
+     "label": "The red light \u2014 family safe, cruel Ben behind the wheel",
+     "cite": {
+      "source": "canon",
+      "page": "117",
+      "scene": "277",
+      "locator": "The red-light ending",
+      "status": "resolved"
+     }
+    }
+   ],
+   "splits": [
+    {
+     "event": "e-J",
+     "cause": "branch",
+     "automatic": true,
+     "traveller": "ben-mind",
+     "source_disposition": "ancestry_prefix",
+     "outcomes": {
+      "+": {
+       "universe": "J+",
+       "entry": "e-Jp",
+       "universe_outcome": "born",
+       "character_outcomes": [
+        {
+         "instance": "ben-jp",
+         "outcome": "born",
+         "fate": "continues the line we follow"
+        }
+       ]
+      },
+      "-": {
+       "universe": "J-",
+       "entry": "e-Jm",
+       "universe_outcome": "born",
+       "character_outcomes": [
+        {
+         "instance": "ben-jm-native",
+         "outcome": "dies",
+         "fate": "dies in the crash"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "event": "e-T",
+     "cause": "trigger_pull",
+     "automatic": true,
+     "traveller": "ben-mind",
+     "source_disposition": "continues",
+     "outcomes": {
+      "+": {
+       "universe": "J+",
+       "entry": "e-Tp",
+       "universe_outcome": "continues",
+       "character_outcomes": [
+        {
+         "instance": "ben-jp",
+         "outcome": "continues",
+         "fate": "survives the trigger"
+        }
+       ]
+      },
+      "-": {
+       "universe": "T-",
+       "entry": "e-Tm",
+       "universe_outcome": "born",
+       "character_outcomes": [
+        {
+         "instance": "ben-tm",
+         "outcome": "dies",
+         "fate": "she arrives to an empty cabin"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "event": "e-M",
+     "cause": "trigger_pull",
+     "automatic": true,
+     "traveller": "ben-mind",
+     "source_disposition": "continues",
+     "outcomes": {
+      "+": {
+       "universe": "*2",
+       "entry": "e-Mp",
+       "universe_outcome": "continues",
+       "character_outcomes": [
+        {
+         "instance": "ben-2v",
+         "outcome": "continues",
+         "fate": "survives the trigger"
+        }
+       ]
+      },
+      "-": {
+       "universe": "M-",
+       "entry": "e-Mm",
+       "universe_outcome": "born",
+       "character_outcomes": [
+        {
+         "instance": "ben-mm",
+         "outcome": "dies",
+         "fate": "dies"
+        }
+       ]
+      }
+     }
+    },
+    {
+     "event": "e-C",
+     "cause": "trigger_pull",
+     "automatic": true,
+     "traveller": "ben-mind",
+     "source_disposition": "continues",
+     "outcomes": {
+      "+": {
+       "universe": "J-",
+       "entry": "e-Cp",
+       "universe_outcome": "continues",
+       "character_outcomes": [
+        {
+         "instance": "ben-jmv",
+         "outcome": "continues",
+         "fate": "survives the trigger"
+        }
+       ]
+      },
+      "-": {
+       "universe": "C-",
+       "entry": "e-Cm",
+       "universe_outcome": "born",
+       "character_outcomes": [
+        {
+         "instance": "ben-cm",
+         "outcome": "dies",
+         "fate": "that world's Ben dies"
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "transfers": [
+    {
+     "id": "tr-2",
+     "traveller": "ben-mind",
+     "from": {
+      "universe": "J+",
+      "exit": "e-Tp"
+     },
+     "to": {
+      "universe": "*2",
+      "entry": "e-2-in"
+     },
+     "mechanism": "consciousness_transfer",
+     "relation": {
+      "kind": "different_universes"
+     }
+    },
+    {
+     "id": "tr-Jm",
+     "traveller": "ben-mind",
+     "from": {
+      "universe": "*2",
+      "exit": "e-Mp"
+     },
+     "to": {
+      "universe": "J-",
+      "entry": "e-Jm-in"
+     },
+     "mechanism": "consciousness_transfer",
+     "relation": {
+      "kind": "different_universes"
+     }
+    },
+    {
+     "id": "tr-F",
+     "traveller": "ben-mind",
+     "from": {
+      "universe": "J-",
+      "exit": "e-Cp"
+     },
+     "to": {
+      "universe": "*F",
+      "entry": "e-F-in"
+     },
+     "mechanism": "consciousness_transfer",
+     "relation": {
+      "kind": "different_universes"
+     }
+    }
+   ],
+   "merges": [],
+   "segments": [
+    {
+     "id": "seg-u1",
+     "universe": "U1",
+     "from": "e-start",
+     "to": "e-J",
+     "label": "U1 \u2014 the initial timeline"
+    },
+    {
+     "id": "seg-jp",
+     "universe": "J+",
+     "from": "e-Jp",
+     "to": "e-Tp",
+     "label": "J+ \u2014 from the crash down"
+    },
+    {
+     "id": "seg-2",
+     "universe": "*2",
+     "from": "e-2-in",
+     "to": "e-Mp",
+     "label": "*2 \u2014 THE TIMELINE WITH HER (from the join down)"
+    },
+    {
+     "id": "seg-jm",
+     "universe": "J-",
+     "from": "e-Jm-in",
+     "to": "e-Cp",
+     "label": "J- \u2014 the world without him (from the join down)"
+    },
+    {
+     "id": "seg-f",
+     "universe": "*F",
+     "from": "e-F-in",
+     "to": "e-end",
+     "label": "*F \u2014 the family world (from the join down)"
+    }
+   ],
+   "beats": [
+    {
+     "id": "b-2",
+     "segment": "seg-2",
+     "story_order": 35,
+     "text": "She is alive here \u2014 she was never the U1 Waif",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "The Waif in *2",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "b-jm",
+     "segment": "seg-jm",
+     "story_order": 55,
+     "text": "The family without him",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "J- family scenes",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "b-f",
+     "segment": "seg-f",
+     "story_order": 75,
+     "text": "Family safe; cruel Ben behind the wheel",
+     "cite": {
+      "source": "canon",
+      "page": "117",
+      "scene": "277",
+      "locator": "The red-light ending",
+      "status": "resolved"
+     }
+    }
+   ],
+   "fates": [
+    {
+     "id": "f-waif-u1",
+     "universe": "U1",
+     "instance": "waif-u1",
+     "event": "e-J",
+     "status": "dead",
+     "cite": {
+      "source": "canon",
+      "page": "4",
+      "scene": "10",
+      "locator": "The Waif dies at the jump",
+      "status": "resolved"
+     }
+    },
+    {
+     "id": "f-ben-jm-native",
+     "universe": "J-",
+     "instance": "ben-jm-native",
+     "event": "e-J",
+     "status": "dead",
+     "cite": {
+      "source": "canon",
+      "page": "4",
+      "scene": "10",
+      "locator": "His counterpart died in the crash",
+      "status": "resolved"
+     }
+    },
+    {
+     "id": "f-ben-tm",
+     "universe": "T-",
+     "instance": "ben-tm",
+     "event": "e-Tm",
+     "status": "dead",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "T- death",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "f-ben-mm",
+     "universe": "M-",
+     "instance": "ben-mm",
+     "event": "e-Mm",
+     "status": "dead",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "M- death",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "f-ben-cm",
+     "universe": "C-",
+     "instance": "ben-cm",
+     "event": "e-Cm",
+     "status": "dead",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "C- death",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "f-waif-2",
+     "universe": "*2",
+     "instance": "waif-2",
+     "event": "e-Mp",
+     "status": "alive",
+     "cite": {
+      "source": "canon",
+      "page": null,
+      "scene": null,
+      "locator": "The Waif alive in *2 after he moves on",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "f-ben-starF",
+     "universe": "*F",
+     "instance": "ben-fv",
+     "event": "e-end",
+     "status": "alive",
+     "cite": {
+      "source": "canon",
+      "page": "117",
+      "scene": "277",
+      "locator": "Cruel Ben behind the wheel",
+      "status": "resolved"
+     }
+    }
+   ],
+   "thread": {
+    "traveller": "ben-mind",
+    "visits": [
+     {
+      "id": "v1",
+      "traveller": "ben-mind",
+      "universe": "U1",
+      "entry": "e-start",
+      "exit": "e-J",
+      "passes": []
+     },
+     {
+      "id": "v2",
+      "traveller": "ben-mind",
+      "universe": "J+",
+      "entry": "e-Jp",
+      "exit": "e-Tp",
+      "passes": [
+       {
+        "split": "e-T",
+        "tine": "+"
+       }
+      ]
+     },
+     {
+      "id": "v3",
+      "traveller": "ben-mind",
+      "universe": "*2",
+      "entry": "e-2-in",
+      "exit": "e-Mp",
+      "passes": [
+       {
+        "split": "e-M",
+        "tine": "+"
+       }
+      ]
+     },
+     {
+      "id": "v4",
+      "traveller": "ben-mind",
+      "universe": "J-",
+      "entry": "e-Jm-in",
+      "exit": "e-Cp",
+      "passes": [
+       {
+        "split": "e-C",
+        "tine": "+"
+       }
+      ]
+     },
+     {
+      "id": "v5",
+      "traveller": "ben-mind",
+      "universe": "*F",
+      "entry": "e-F-in",
+      "exit": "e-end",
+      "passes": []
+     }
+    ],
+    "links": [
+     {
+      "from_visit": "v1",
+      "to_visit": "v2",
+      "kind": "split",
+      "split": "e-J",
+      "tine": "+"
+     },
+     {
+      "from_visit": "v2",
+      "to_visit": "v3",
+      "kind": "transfer",
+      "transfer": "tr-2"
+     },
+     {
+      "from_visit": "v3",
+      "to_visit": "v4",
+      "kind": "transfer",
+      "transfer": "tr-Jm"
+     },
+     {
+      "from_visit": "v4",
+      "to_visit": "v5",
+      "kind": "transfer",
+      "transfer": "tr-F"
+     }
+    ]
+   },
+   "layout": {
+    "lane_order": [
+     "U1",
+     "J+",
+     "*2",
+     "J-",
+     "*F",
+     "T-",
+     "M-",
+     "C-"
+    ],
+    "collapsed_universes": []
+   },
+   "assumptions": [
+    "J births both J+ and J-; U1 becomes ancestry (fixture allocation)",
+    "T+, M+, C+ preserve their source universes' identities",
+    "Transfer mechanisms are consciousness crossings; body disposition unspecified by canon",
+    "*F abuse is implied, not shown (per canon)"
+   ]
+  },
+  {
+   "namespace": "W",
+   "title": "The Waif's jumps (namespace isolation test)",
+   "universes": [
+    {
+     "id": "WU1",
+     "label": "Her initial timeline",
+     "origin": {
+      "kind": "initial"
+     }
+    },
+    {
+     "id": "*W2",
+     "label": "Second carousel world",
+     "origin": {
+      "kind": "preexisting",
+      "ancestry": "off_chart"
+     }
+    },
+    {
+     "id": "*W3",
+     "label": "Third carousel world",
+     "origin": {
+      "kind": "preexisting",
+      "ancestry": "off_chart"
+     }
+    }
+   ],
+   "instances": [
+    {
+     "id": "waif-wu1",
+     "character": "waif",
+     "universe": "WU1",
+     "native_to_universe": true,
+     "provenance": "native"
+    },
+    {
+     "id": "waif-w2v",
+     "character": "waif",
+     "universe": "*W2",
+     "native_to_universe": false,
+     "provenance": "arrival"
+    },
+    {
+     "id": "waif-w3v",
+     "character": "waif",
+     "universe": "*W3",
+     "native_to_universe": false,
+     "provenance": "arrival"
+    }
+   ],
+   "events": [
+    {
+     "id": "we-start",
+     "kind": "start",
+     "universe": "WU1",
+     "story_order": 0,
+     "world_time": null,
+     "label": "Her initial timeline",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W graph opening",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "we-1-out",
+     "kind": "exit",
+     "universe": "WU1",
+     "story_order": 10,
+     "world_time": null,
+     "label": "W1 \u2014 first jump",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W1 transfer",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "we-2-in",
+     "kind": "entry",
+     "universe": "*W2",
+     "story_order": 20,
+     "world_time": null,
+     "label": "She enters *W2",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W1 arrival",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "we-2-out",
+     "kind": "exit",
+     "universe": "*W2",
+     "story_order": 30,
+     "world_time": null,
+     "label": "W2 \u2014 second jump",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W2 transfer",
+      "status": "unavailable"
+     }
+    },
+    {
+     "id": "we-3-in",
+     "kind": "entry",
+     "universe": "*W3",
+     "story_order": 40,
+     "world_time": null,
+     "label": "She enters *W3",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W2 arrival",
+      "status": "unavailable"
+     }
+    }
+   ],
+   "splits": [],
+   "transfers": [
+    {
+     "id": "W1",
+     "traveller": "waif-mind",
+     "from": {
+      "universe": "WU1",
+      "exit": "we-1-out"
+     },
+     "to": {
+      "universe": "*W2",
+      "entry": "we-2-in"
+     },
+     "mechanism": "consciousness_transfer",
+     "relation": {
+      "kind": "different_universes"
+     }
+    },
+    {
+     "id": "W2",
+     "traveller": "waif-mind",
+     "from": {
+      "universe": "*W2",
+      "exit": "we-2-out"
+     },
+     "to": {
+      "universe": "*W3",
+      "entry": "we-3-in"
+     },
+     "mechanism": "consciousness_transfer",
+     "relation": {
+      "kind": "different_universes"
+     }
+    }
+   ],
+   "merges": [],
+   "segments": [],
+   "beats": [],
+   "fates": [
+    {
+     "id": "f-waif-wu1",
+     "universe": "WU1",
+     "instance": "waif-wu1",
+     "event": "we-1-out",
+     "status": "unknown",
+     "cite": {
+      "source": "allocation",
+      "page": null,
+      "scene": null,
+      "locator": "W1 mechanism unspecified; fate not asserted",
+      "status": "unavailable"
+     }
+    }
+   ],
+   "thread": {
+    "traveller": "waif-mind",
+    "visits": [
+     {
+      "id": "wv1",
+      "traveller": "waif-mind",
+      "universe": "WU1",
+      "entry": "we-start",
+      "exit": "we-1-out",
+      "passes": []
+     },
+     {
+      "id": "wv2",
+      "traveller": "waif-mind",
+      "universe": "*W2",
+      "entry": "we-2-in",
+      "exit": "we-2-out",
+      "passes": []
+     },
+     {
+      "id": "wv3",
+      "traveller": "waif-mind",
+      "universe": "*W3",
+      "entry": "we-3-in",
+      "exit": "we-3-in",
+      "passes": []
+     }
+    ],
+    "links": [
+     {
+      "from_visit": "wv1",
+      "to_visit": "wv2",
+      "kind": "transfer",
+      "transfer": "W1"
+     },
+     {
+      "from_visit": "wv2",
+      "to_visit": "wv3",
+      "kind": "transfer",
+      "transfer": "W2"
+     }
+    ]
+   },
+   "layout": {
+    "lane_order": [
+     "WU1",
+     "*W2",
+     "*W3"
+    ],
+    "collapsed_universes": []
+   },
+   "assumptions": [
+    "W1 and W2 are fixture allocations, not trigger pulls",
+    "Destinations and order exist to test namespace isolation"
+   ]
+  }
+ ],
+ "graph_links": [],
+ "extensions": {}
+}

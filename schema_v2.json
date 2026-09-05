@@ -1,0 +1,891 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fut.local/schema_v2.json",
+  "title": "Film Universe Timelines document model v2.3 (frozen, R1)",
+  "description": "Structural schema only. Cross-reference resolution, ancestry, mortality, thread continuity and other semantic invariants (E040+) are enforced by build/semantic_validate.py, not here, per spec section B's own split between 'structural schema' (B2) and later numbered checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "specification_revision", "interpretation_profile", "interpretation_rules", "validation_profile", "meta", "sources", "characters", "travellers", "namespaces", "graphs", "graph_links", "extensions"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "specification_revision": {"const": "2.3"},
+    "interpretation_profile": {"$ref": "#/$defs/interpretationProfile"},
+    "interpretation_rules": {"enum": ["none", "waif"]},
+    "validation_profile": {"enum": ["production", "evidence_pending"]},
+    "meta": {"$ref": "#/$defs/meta"},
+    "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}},
+    "characters": {"type": "array", "items": {"$ref": "#/$defs/character"}},
+    "travellers": {"type": "array", "items": {"$ref": "#/$defs/traveller"}},
+    "namespaces": {"type": "array", "items": {"$ref": "#/$defs/namespace"}},
+    "graphs": {"type": "array", "items": {"$ref": "#/$defs/graph"}},
+    "graph_links": {"type": "array", "items": {"$ref": "#/$defs/graphLink"}},
+    "extensions": {"type": "object"}
+  },
+  "$defs": {
+
+    "crossRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["namespace", "id"],
+      "properties": {"namespace": {"type": "string"}, "id": {"type": "string"}}
+    },
+
+    "presetString": {
+      "enum": ["P1", "P2", "P3", "P4", "waif", "tenet", "memento", "dark", "steins-gate", "looper", "eot", "darko", "azkaban", "predestination", "timecrimes", "interstellar"]
+    },
+
+    "parametricProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declaration", "direction", "presentation", "branching", "revision", "loop", "metric"],
+      "properties": {
+        "declaration": {"enum": ["declared", "undeclared"]},
+        "direction": {"enum": ["forward", "inverted", "per-traveller", null]},
+        "presentation": {"enum": ["story", "dual", null]},
+        "branching": {"enum": ["none", "siblings", "knot", "worldlines-with-metric", "primary-tangent", null]},
+        "revision": {"enum": ["none", "supersede", "ladder-with-body-linkage", null]},
+        "loop": {"enum": ["none", "memory-reset", "fated-closed", "doomed-collapsing", "death-reset-external-anchor", null]},
+        "metric": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "array", "items": {"enum": ["divergence-value", "relativistic-clock-shear"]}, "uniqueItems": true}
+          ]
+        }
+      },
+      "if": {"properties": {"declaration": {"const": "undeclared"}}},
+      "then": {
+        "properties": {
+          "direction": {"const": null}, "presentation": {"const": null}, "branching": {"const": null},
+          "revision": {"const": null}, "loop": {"const": null}, "metric": {"const": null}
+        }
+      }
+    },
+
+    "interpretationProfile": {
+      "oneOf": [
+        {"$ref": "#/$defs/presetString"},
+        {"$ref": "#/$defs/parametricProfile"}
+      ]
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "subtitle", "footer", "axis"],
+      "properties": {
+        "title": {"type": "string"}, "subtitle": {"type": "string"}, "footer": {"type": "string"},
+        "axis": {"enum": ["story_order", "view_order"]}
+      }
+    },
+
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "kind", "text"],
+      "properties": {
+        "id": {"type": "string"}, "title": {"type": "string"},
+        "kind": {"enum": ["screenplay", "canon_statement", "test_fixture"]},
+        "text": {"type": "string"}
+      }
+    },
+
+    "character": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label"], "properties": {"id": {"type": "string"}, "label": {"type": "string"}}
+    },
+
+    "traveller": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "character", "label", "color"],
+      "properties": {
+        "id": {"type": "string"}, "character": {"type": "string"}, "label": {"type": "string"},
+        "color": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "integer", "minimum": 0, "maximum": 255}}
+      }
+    },
+
+    "namespace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label"], "properties": {"id": {"type": "string"}, "label": {"type": "string"}}
+    },
+
+    "graphLink": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from", "to", "label"],
+      "properties": {
+        "from": {"$ref": "#/$defs/crossRef"}, "to": {"$ref": "#/$defs/crossRef"}, "label": {"type": "string"}
+      }
+    },
+
+    "cite": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source", "page", "scene", "locator", "status"],
+      "properties": {
+        "source": {"type": "string"},
+        "page": {"type": ["string", "null"]},
+        "scene": {"type": ["string", "null"]},
+        "locator": {"type": "string"},
+        "status": {"enum": ["resolved", "unavailable"]}
+      }
+    },
+
+    "worldTime": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["clock", "value", "unit"],
+          "properties": {"clock": {"type": "string"}, "value": {"type": "number"}, "unit": {"type": "string"}}
+        }
+      ]
+    },
+
+    "origin": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "initial"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "ancestry"], "properties": {"kind": {"const": "preexisting"}, "ancestry": {"const": "off_chart"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "event", "parent", "tine"], "properties": {"kind": {"const": "born"}, "event": {"type": "string"}, "parent": {"type": "string"}, "tine": {"enum": ["+", "-"]}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "exists_by"], "properties": {"kind": {"const": "unknown"}, "exists_by": {"type": "string"}}}
+      ]
+    },
+
+    "divergence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["system", "value", "unit", "evidence_events"],
+      "properties": {
+        "system": {"type": "string"}, "value": {"type": "string", "pattern": "^-?[0-9]+(\\.[0-9]+)?$"},
+        "unit": {"type": "string"}, "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "universe": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "label", "origin"],
+      "properties": {
+        "id": {"type": "string"}, "label": {"type": "string"}, "origin": {"$ref": "#/$defs/origin"},
+        "divergence": {"$ref": "#/$defs/divergence"}
+      }
+    },
+
+    "instance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "character", "universe", "native_to_universe", "provenance"],
+      "properties": {
+        "id": {"type": "string"}, "character": {"type": "string"}, "universe": {"type": "string"},
+        "native_to_universe": {"type": ["boolean", "null"]},
+        "provenance": {"enum": ["native", "split_counterpart", "arrival", "unknown"]},
+        "body": {"type": "string"}, "identity": {"type": "string"}
+      }
+    },
+
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "universe", "story_order", "world_time", "label", "cite"],
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["start", "split", "outcome", "entry", "exit", "anchor", "cutoff", "gate_entry", "gate_exit"]},
+        "universe": {"type": "string"},
+        "revision": {"type": "string"},
+        "story_order": {"type": "number"},
+        "view_order": {"type": "number"},
+        "world_time": {"$ref": "#/$defs/worldTime"},
+        "label": {"type": "string"},
+        "cite": {"$ref": "#/$defs/cite"},
+        "location": {"type": "string"},
+        "activation": {"type": "string"}
+      }
+    },
+
+    "characterOutcome": {
+      "type": "object", "additionalProperties": false,
+      "required": ["instance", "outcome", "fate"],
+      "properties": {
+        "instance": {"type": "string"}, "outcome": {"enum": ["continues", "born", "dies", "unknown"]}, "fate": {"type": "string"}
+      }
+    },
+
+    "splitOutcome": {
+      "type": "object", "additionalProperties": false,
+      "required": ["universe", "entry", "universe_outcome", "character_outcomes"],
+      "properties": {
+        "universe": {"type": "string"}, "entry": {"type": "string"},
+        "universe_outcome": {"enum": ["continues", "born", "unknown"]},
+        "character_outcomes": {"type": "array", "items": {"$ref": "#/$defs/characterOutcome"}}
+      }
+    },
+
+    "split": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event", "cause", "automatic", "traveller", "source_disposition", "outcomes"],
+      "properties": {
+        "event": {"type": "string"},
+        "cause": {"enum": ["trigger_pull", "branch", "unknown"]},
+        "automatic": {"type": "boolean"},
+        "traveller": {"type": "string"},
+        "source_disposition": {"enum": ["continues", "ancestry_prefix"]},
+        "outcomes": {
+          "type": "object", "additionalProperties": false, "required": ["+", "-"],
+          "properties": {"+": {"$ref": "#/$defs/splitOutcome"}, "-": {"$ref": "#/$defs/splitOutcome"}}
+        }
+      }
+    },
+
+    "relation": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "unknown"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "different_universes"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "same_world"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "parent", "split"], "properties": {"kind": {"const": "siblings"}, "parent": {"type": "string"}, "split": {"type": "string"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "siblings_off_chart"}}}
+      ]
+    },
+
+    "embodiment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "from_instance", "to_instance"],
+      "properties": {
+        "mode": {"enum": ["unknown", "occupies_host", "coexists", "displaces", "fusion"]},
+        "from_instance": {"type": ["string", "null"]},
+        "to_instance": {"type": ["string", "null"]},
+        "other_travellers": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+
+    "bodyTransport": {
+      "type": "object", "additionalProperties": false,
+      "required": ["body", "from_instance", "to_instance"],
+      "properties": {"body": {"type": "string"}, "from_instance": {"type": "string"}, "to_instance": {"type": "string"}}
+    },
+
+    "endpointRef": {
+      "type": "object", "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "universe": {"type": "string"}, "exit": {"type": "string"}, "entry": {"type": "string"}, "event": {"type": "string"}
+      }
+    },
+
+    "transfer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "traveller", "from", "to", "mechanism", "relation"],
+      "properties": {
+        "id": {"type": "string"},
+        "traveller": {"type": ["string", "null"]},
+        "from": {"$ref": "#/$defs/endpointRef"},
+        "to": {"$ref": "#/$defs/endpointRef"},
+        "mechanism": {"enum": ["consciousness_transfer", "apparent_reset", "time_travel", "time_leap", "object_transport", "observed_transition", "ordinary_transport", "temporal_signal"]},
+        "relation": {"$ref": "#/$defs/relation"},
+        "traversal": {"enum": ["body", "memory", "signal", "object"]},
+        "embodiment": {"$ref": "#/$defs/embodiment"},
+        "body_transport": {"$ref": "#/$defs/bodyTransport"},
+        "object": {"type": "string"},
+        "memory_payload": {"type": "string"},
+        "pre_leap_body": {
+          "type": "object", "additionalProperties": false, "required": ["retained_by", "fate"],
+          "properties": {"retained_by": {"type": "string"}, "fate": {"type": ["string", "null"]}}
+        },
+        "destination_memory": {
+          "type": "object", "additionalProperties": false, "required": ["host", "effect", "prior_state"],
+          "properties": {"host": {"type": "string"}, "effect": {"enum": ["replace", "remove"]}, "prior_state": {"type": "string"}}
+        },
+        "sender": {"type": "string"}, "receiver": {"type": "string"}, "payload": {"type": "string"},
+        "channel": {"type": "string"}, "causal_link": {"type": "string"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+
+    "segment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "universe", "from", "to", "label"],
+      "properties": {
+        "id": {"type": "string"}, "universe": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"},
+        "label": {"type": "string"}, "revision": {"type": "string"}
+      }
+    },
+
+    "beat": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "segment", "story_order", "text", "cite"],
+      "properties": {
+        "id": {"type": "string"}, "segment": {"type": "string"}, "story_order": {"type": "number"},
+        "view_order": {"type": "number"},
+        "text": {"type": "string"}, "cite": {"$ref": "#/$defs/cite"},
+        "screen": {"enum": ["film", "flashback", "deduced"]},
+        "certainty": {"enum": ["seen", "flashback", "seen-later", "never-shown"]},
+        "tone": {"enum": ["neutral", "death", "good"]},
+        "side": {"enum": ["left", "right"]},
+        "traveller": {"type": "string"}
+      }
+    },
+
+    "fate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "universe", "instance", "event", "status", "cite"],
+      "properties": {
+        "id": {"type": "string"}, "universe": {"type": "string"}, "instance": {"type": "string"}, "event": {"type": "string"},
+        "status": {"enum": ["alive", "dead", "unknown", "nonexistent"]},
+        "cite": {"$ref": "#/$defs/cite"},
+        "revision": {"type": "string"}
+      }
+    },
+
+    "pass": {
+      "type": "object", "additionalProperties": false,
+      "required": ["split", "tine"], "properties": {"split": {"type": "string"}, "tine": {"enum": ["+", "-"]}}
+    },
+
+    "visit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "traveller", "universe", "entry", "exit", "passes"],
+      "properties": {
+        "id": {"type": "string"}, "traveller": {"type": "string"}, "universe": {"type": "string"},
+        "entry": {"type": "string"}, "exit": {"type": "string"},
+        "passes": {"type": "array", "items": {"$ref": "#/$defs/pass"}},
+        "revision": {"type": "string"}, "instance": {"type": ["string", "null"]}, "motion": {"type": "string"}
+      }
+    },
+
+    "threadLink": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from_visit", "to_visit", "kind"],
+      "properties": {
+        "from_visit": {"type": "string"}, "to_visit": {"type": "string"},
+        "kind": {"enum": ["split", "transfer", "revision", "gate", "state_passage", "journey_gap"]},
+        "split": {"type": "string"}, "tine": {"enum": ["+", "-"]},
+        "transfer": {"type": "string"},
+        "revision": {"type": "string"},
+        "gate": {"type": "string"},
+        "state_passage": {"type": "string"},
+        "journey_gap": {"type": "string"}
+      }
+    },
+
+    "thread": {
+      "type": "object", "additionalProperties": false,
+      "required": ["traveller", "visits", "links"],
+      "properties": {
+        "traveller": {"type": "string"},
+        "visits": {"type": "array", "items": {"$ref": "#/$defs/visit"}},
+        "links": {"type": "array", "items": {"$ref": "#/$defs/threadLink"}},
+        "termination": {
+          "type": "object", "additionalProperties": false,
+          "required": ["event", "reason", "instance", "fate"],
+          "properties": {
+            "event": {"type": "string"}, "reason": {"enum": ["embodied_death"]},
+            "instance": {"type": "string"}, "fate": {"type": "string"}
+          }
+        }
+      }
+    },
+
+    "additionalThread": {
+      "allOf": [
+        {"$ref": "#/$defs/thread"},
+        {"type": "object", "required": ["id"], "properties": {"id": {"type": "string"}}}
+      ]
+    },
+
+    "layout": {
+      "type": "object", "additionalProperties": false,
+      "required": ["lane_order", "collapsed_universes"],
+      "properties": {
+        "lane_order": {"type": "array", "items": {"type": "string"}},
+        "collapsed_universes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+
+    "transition": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["kind", "from", "to", "traveller", "memory"],
+          "properties": {
+            "kind": {"enum": ["overwrite", "reset"]},
+            "from": {"type": "string"}, "to": {"type": "string"}, "traveller": {"type": "string"},
+            "memory": {"enum": ["retained", "none", "unknown"]}
+          }
+        }
+      ]
+    },
+
+    "revision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "universe", "order", "transition"],
+      "properties": {
+        "id": {"type": "string"}, "universe": {"type": "string"}, "order": {"type": "integer", "minimum": 0},
+        "transition": {"$ref": "#/$defs/transition"}, "ladder": {"type": "string"}
+      }
+    },
+
+    "revisionLadder": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "universe", "evidence_events"],
+      "properties": {"id": {"type": "string"}, "universe": {"type": "string"}, "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}}
+    },
+
+    "bodyLinkageUpdate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "channel", "from", "to", "from_revision", "to_revision", "effect", "state_before", "state_after"],
+      "properties": {
+        "id": {"type": "string"}, "channel": {"enum": ["wound", "memory", "existence"]},
+        "from": {"type": "string"}, "to": {"type": "string"},
+        "from_revision": {"type": "string"}, "to_revision": {"type": "string"},
+        "effect": {"enum": ["replace", "remove"]},
+        "state_before": {"type": "string"}, "state_after": {"type": ["string", "null"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"effect": {"const": "replace"}}}, "then": {"properties": {"state_after": {"type": "string"}}}}
+      ]
+    },
+
+    "bodyLinkage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "from_instance", "to_instance", "body", "channels", "updates", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "from_instance": {"type": "string"}, "to_instance": {"type": "string"}, "body": {"type": "string"},
+        "channels": {"type": "array", "minItems": 1, "items": {"enum": ["wound", "memory", "existence"]}, "uniqueItems": true},
+        "updates": {"type": "array", "items": {"$ref": "#/$defs/bodyLinkageUpdate"}},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "loop": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "universes", "entry", "closure", "cycle", "instances", "reset_memory", "evidence_events"],
+          "properties": {
+            "id": {"type": "string"}, "kind": {"const": "fated-closed"},
+            "universes": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "entry": {"type": "string"}, "closure": {"type": "string"}, "cycle": {"type": "string"},
+            "instances": {"type": "array", "items": {"type": "string"}},
+            "reset_memory": {"const": "not-applicable"},
+            "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "primary_universe", "tangent_universe", "opens", "closes", "stability", "lifetime", "closure_cycle", "termination", "residues", "evidence_events"],
+          "properties": {
+            "id": {"type": "string"}, "kind": {"const": "doomed-collapsing"},
+            "primary_universe": {"type": "string"}, "tangent_universe": {"type": "string"},
+            "opens": {"type": "string"}, "closes": {"type": "string"},
+            "stability": {"enum": ["unstable"]},
+            "lifetime": {
+              "type": "object", "additionalProperties": false, "required": ["clock", "start", "end", "unit"],
+              "properties": {"clock": {"type": "string"}, "start": {"type": "number"}, "end": {"type": "number"}, "unit": {"type": "string"}}
+            },
+            "closure_cycle": {"type": "string"},
+            "termination": {"const": "world-collapse"},
+            "residues": {
+              "type": "array",
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["object", "from", "to", "transfer"],
+                "properties": {"object": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"}, "transfer": {"type": "string"}}
+              }
+            },
+            "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "universe", "owner", "reset_source", "subjects", "anchors", "resets", "ending", "evidence_events"],
+          "properties": {
+            "id": {"type": "string"}, "kind": {"const": "death-reset-external-anchor"},
+            "universe": {"type": "string"}, "owner": {"type": "string"}, "reset_source": {"type": "string"},
+            "subjects": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "anchors": {
+              "type": "array", "minItems": 1,
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["id", "event", "world_time"],
+                "properties": {"id": {"type": "string"}, "event": {"type": "string"}, "world_time": {"$ref": "#/$defs/worldTime"}}
+              }
+            },
+            "resets": {
+              "type": "array",
+              "items": {
+                "type": "object", "additionalProperties": false,
+                "required": ["revision", "trigger", "trigger_fate", "anchor", "source", "memory_subjects"],
+                "properties": {
+                  "revision": {"type": "string"}, "trigger": {"type": "string"}, "trigger_fate": {"type": "string"},
+                  "anchor": {"type": "string"}, "source": {"type": "string"},
+                  "memory_subjects": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+                }
+              }
+            },
+            "ending": {
+              "type": "object", "additionalProperties": false, "required": ["event", "state", "further_resets"],
+              "properties": {"event": {"type": "string"}, "state": {"type": "string"}, "further_resets": {"type": "string"}}
+            },
+            "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "universe", "subjects", "revisions", "evidence_events"],
+          "properties": {
+            "id": {"type": "string"}, "kind": {"const": "memory-reset"}, "universe": {"type": "string"},
+            "subjects": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "revisions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+          }
+        }
+      ]
+    },
+
+    "causalLink": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "from", "to", "subject", "cite"],
+      "properties": {
+        "id": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"}, "subject": {"type": "string"},
+        "cite": {"$ref": "#/$defs/cite"}
+      }
+    },
+
+    "causalCycle": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "links"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"enum": ["closed_loop", "bootstrap"]},
+        "links": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "characterVersion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "character", "universe", "instances", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "character": {"type": "string"}, "universe": {"type": "string"},
+        "instances": {"type": "array", "items": {"type": "string"}},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "correspondence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "versions", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"const": "counterparts"},
+        "versions": {"type": "array", "items": {"type": "string"}, "minItems": 2},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "genealogyEdge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "parent", "child", "parent_instance", "child_instance", "causal_link", "evidence_events", "parent_event", "child_event", "parent_role"],
+      "properties": {
+        "id": {"type": "string"}, "parent": {"type": "string"}, "child": {"type": "string"},
+        "parent_instance": {"type": "string"}, "child_instance": {"type": "string"},
+        "causal_link": {"type": "string"},
+        "parent_event": {"type": "string"}, "child_event": {"type": "string"},
+        "parent_role": {"enum": ["mother", "father", "parent", "unknown"]},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "genealogyCycle": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "edges", "causal_cycle", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "edges": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "causal_cycle": {"type": "string"}, "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "knotDissolution": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["intervention", "targets", "termination_events", "origin_continues_at", "causal_links"],
+          "properties": {
+            "intervention": {"type": "string"},
+            "targets": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "termination_events": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+            "origin_continues_at": {"type": "string"},
+            "causal_links": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+          }
+        }
+      ]
+    },
+
+    "knot": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "worlds", "entanglement_links", "cycles", "origin_world", "dissolution", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"},
+        "worlds": {"type": "array", "items": {"type": "string"}, "minItems": 2},
+        "entanglement_links": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "cycles": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "origin_world": {"type": "string"},
+        "dissolution": {"$ref": "#/$defs/knotDissolution"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "motion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "traveller", "instance", "from", "to", "proper_order", "direction", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "traveller": {"type": "string"}, "instance": {"type": "string"},
+        "from": {"type": "string"}, "to": {"type": "string"},
+        "proper_order": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+        "direction": {
+          "type": "object", "additionalProperties": false, "required": ["clock", "sign"],
+          "properties": {"clock": {"type": "string"}, "sign": {"enum": [1, -1]}}
+        },
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "gate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "location", "traveller", "entry", "exit", "entry_direction", "exit_direction", "from_motion", "to_motion", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"type": "string"}, "location": {"type": "string"}, "traveller": {"type": "string"},
+        "entry": {"type": "string"}, "exit": {"type": "string"},
+        "entry_direction": {"enum": [1, -1]}, "exit_direction": {"enum": [1, -1]},
+        "from_motion": {"type": "string"}, "to_motion": {"type": "string"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "pincerParticipant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["motion", "coordination_events"],
+      "properties": {"motion": {"type": "string"}, "coordination_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}}
+    },
+
+    "pincer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "motions", "coordination_links", "participants", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"},
+        "motions": {"type": "array", "items": {"type": "string"}, "minItems": 2},
+        "coordination_links": {"type": "array", "items": {"type": "string"}},
+        "participants": {"type": "array", "items": {"$ref": "#/$defs/pincerParticipant"}, "minItems": 2},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "worldlineSystem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "worlds", "existence", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "worlds": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "existence": {"enum": ["single-active", "coexisting", "undeclared"]},
+        "activation_sequence": {"type": "array", "items": {"type": "string"}},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"existence": {"const": "single-active"}}}, "then": {"required": ["activation_sequence"]}}
+      ]
+    },
+
+    "attractorField": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "system", "worldlines", "fixed_outcomes", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "system": {"type": "string"}, "worldlines": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "fixed_outcomes": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["id", "claim", "witnesses"],
+            "properties": {"id": {"type": "string"}, "claim": {"type": "string"}, "witnesses": {"type": "array", "items": {"type": "string"}, "minItems": 1}}
+          }
+        },
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "activation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "world", "order", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "world": {"type": "string"}, "order": {"type": "integer", "minimum": 0},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "clock": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "unit"], "properties": {"id": {"type": "string"}, "unit": {"type": "string"}}
+    },
+
+    "location": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "universe", "clock", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "universe": {"type": "string"}, "clock": {"type": "string"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "clockRate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "location", "from", "to", "relative_to", "rate", "synchronization", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "location": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"},
+        "relative_to": {"type": "string"},
+        "rate": {
+          "type": "object", "additionalProperties": false, "required": ["numerator", "denominator"],
+          "properties": {"numerator": {"type": "number", "exclusiveMinimum": 0}, "denominator": {"type": "number", "exclusiveMinimum": 0}}
+        },
+        "synchronization": {
+          "type": "object", "additionalProperties": false, "required": ["local_event", "reference_event"],
+          "properties": {"local_event": {"type": "string"}, "reference_event": {"type": "string"}}
+        },
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "provenance": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind", "event"], "properties": {"kind": {"const": "origin"}, "event": {"type": ["string", "null"]}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "cycle"], "properties": {"kind": {"const": "closed"}, "cycle": {"type": "string"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind", "observed_at"], "properties": {"kind": {"const": "unknown"}, "observed_at": {"type": "string"}}}
+      ]
+    },
+
+    "identity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "label", "character", "provenance", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "kind": {"enum": ["person", "body", "object", "information", "entity"]},
+        "label": {"type": "string"}, "character": {"type": ["string", "null"]},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "components": {"type": "array", "items": {"type": "string"}},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "objectOccurrence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "object", "event", "location", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "object": {"type": "string"}, "event": {"type": "string"}, "location": {"type": "string"},
+        "bootstrap_participation": {"type": "boolean"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "identityRole": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "identity", "instance", "role", "event", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "identity": {"type": "string"}, "instance": {"type": "string"},
+        "role": {"type": "string"}, "event": {"type": "string"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "bodyPosition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "body", "instance", "event", "proper_order", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "body": {"type": "string"}, "instance": {"type": "string"}, "event": {"type": "string"},
+        "proper_order": {"type": "number"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "statePassageEndpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["revision", "event"], "properties": {"revision": {"type": "string"}, "event": {"type": "string"}}
+    },
+
+    "statePassage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "traveller", "from", "to", "memory", "transport", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "traveller": {"type": "string"},
+        "from": {"$ref": "#/$defs/statePassageEndpoint"}, "to": {"$ref": "#/$defs/statePassageEndpoint"},
+        "memory": {"enum": ["retained", "none", "unknown"]},
+        "transport": {"type": ["string", "null"]},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "journeyGap": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "traveller", "from", "to", "mechanism", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "traveller": {"type": "string"}, "from": {"type": "string"}, "to": {"type": "string"},
+        "mechanism": {"const": "unexpanded"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "observation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "event", "observer", "subject_instance", "claim", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "event": {"type": "string"}, "observer": {"type": "string"},
+        "subject_instance": {"type": "string"}, "claim": {"type": "string"},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "presentation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "event", "view_order", "perspective_instance", "evidence_events"],
+      "properties": {
+        "id": {"type": "string"}, "event": {"type": "string"}, "view_order": {"type": "number"},
+        "perspective_instance": {"type": ["string", "null"]},
+        "evidence_events": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["namespace", "title", "universes", "instances", "events", "splits", "transfers", "merges", "segments", "beats", "fates", "thread", "layout", "assumptions"],
+      "properties": {
+        "namespace": {"type": "string"},
+        "title": {"type": "string"},
+        "universes": {"type": "array", "items": {"$ref": "#/$defs/universe"}},
+        "instances": {"type": "array", "items": {"$ref": "#/$defs/instance"}},
+        "events": {"type": "array", "items": {"$ref": "#/$defs/event"}},
+        "splits": {"type": "array", "items": {"$ref": "#/$defs/split"}},
+        "transfers": {"type": "array", "items": {"$ref": "#/$defs/transfer"}},
+        "merges": {"type": "array", "maxItems": 0},
+        "segments": {"type": "array", "items": {"$ref": "#/$defs/segment"}},
+        "beats": {"type": "array", "items": {"$ref": "#/$defs/beat"}},
+        "fates": {"type": "array", "items": {"$ref": "#/$defs/fate"}},
+        "thread": {"$ref": "#/$defs/thread"},
+        "additional_threads": {"type": "array", "items": {"$ref": "#/$defs/additionalThread"}},
+        "layout": {"$ref": "#/$defs/layout"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+
+        "revisions": {"type": "array", "items": {"$ref": "#/$defs/revision"}},
+        "revision_ladders": {"type": "array", "items": {"$ref": "#/$defs/revisionLadder"}},
+        "body_linkages": {"type": "array", "items": {"$ref": "#/$defs/bodyLinkage"}},
+        "loops": {"type": "array", "items": {"$ref": "#/$defs/loop"}},
+        "causal_links": {"type": "array", "items": {"$ref": "#/$defs/causalLink"}},
+        "causal_cycles": {"type": "array", "items": {"$ref": "#/$defs/causalCycle"}},
+        "character_versions": {"type": "array", "items": {"$ref": "#/$defs/characterVersion"}},
+        "correspondences": {"type": "array", "items": {"$ref": "#/$defs/correspondence"}},
+        "genealogy": {"type": "array", "items": {"$ref": "#/$defs/genealogyEdge"}},
+        "genealogy_cycles": {"type": "array", "items": {"$ref": "#/$defs/genealogyCycle"}},
+        "knots": {"type": "array", "items": {"$ref": "#/$defs/knot"}},
+        "motions": {"type": "array", "items": {"$ref": "#/$defs/motion"}},
+        "gates": {"type": "array", "items": {"$ref": "#/$defs/gate"}},
+        "pincers": {"type": "array", "items": {"$ref": "#/$defs/pincer"}},
+        "worldline_systems": {"type": "array", "items": {"$ref": "#/$defs/worldlineSystem"}},
+        "attractor_fields": {"type": "array", "items": {"$ref": "#/$defs/attractorField"}},
+        "activations": {"type": "array", "items": {"$ref": "#/$defs/activation"}},
+        "clocks": {"type": "array", "items": {"$ref": "#/$defs/clock"}},
+        "locations": {"type": "array", "items": {"$ref": "#/$defs/location"}},
+        "clock_rates": {"type": "array", "items": {"$ref": "#/$defs/clockRate"}},
+        "identities": {"type": "array", "items": {"$ref": "#/$defs/identity"}},
+        "object_occurrences": {"type": "array", "items": {"$ref": "#/$defs/objectOccurrence"}},
+        "identity_roles": {"type": "array", "items": {"$ref": "#/$defs/identityRole"}},
+        "body_positions": {"type": "array", "items": {"$ref": "#/$defs/bodyPosition"}},
+        "state_passages": {"type": "array", "items": {"$ref": "#/$defs/statePassage"}},
+        "journey_gaps": {"type": "array", "items": {"$ref": "#/$defs/journeyGap"}},
+        "observations": {"type": "array", "items": {"$ref": "#/$defs/observation"}},
+        "presentations": {"type": "array", "items": {"$ref": "#/$defs/presentation"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,432 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "P2",
+  "interpretation_rules": "none",
+  "validation_profile": "evidence_pending",
+  "graph_links": [],
+  "extensions": {},
+  "meta": {
+    "title": "Back to the Future Part II",
+    "subtitle": "P2 single mutable timeline - revisions supersede, not branch",
+    "footer": "Alt-1985 is a revision of one Hill Valley, not a second world. Costs of this reading recorded in OPEN_ISSUES.md.",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "BTTF Part II (1989), theatrical cut",
+      "kind": "canon_statement",
+      "text": "Marty, Doc and Jennifer travel 1985->2015. Old Biff steals the DeLorean, gives his younger self the Gray's Sports Almanac, returns. The timeline changes around them: 1985 becomes alt-1985 (Biff's wealth, George dead, Lorraine married to Biff). Marty/Doc return to this alt-1985, then go back to November 12 1955 to steal the almanac back and burn it; timeline begins restoring."
+    },
+    {
+      "id": "allocation",
+      "title": "Fixture allocations",
+      "kind": "test_fixture",
+      "text": "Revisions: rA (original history through 2015), rB (almanac-given, alt-history), rC (almanac burned, restoring toward rA). Story order follows the film's view order. Costs of the P2 reading (Marty's 1955 presence during rA and rB simultaneously, Old Biff's return leg) are logged in OPEN_ISSUES.md per the adversarial pass."
+    }
+  ],
+  "characters": [
+    {
+      "id": "marty",
+      "label": "Marty McFly"
+    },
+    {
+      "id": "doc",
+      "label": "Doc Brown"
+    },
+    {
+      "id": "biff",
+      "label": "Biff Tannen"
+    },
+    {
+      "id": "old-biff",
+      "label": "Old Biff"
+    },
+    {
+      "id": "jennifer",
+      "label": "Jennifer Parker"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "marty-mind",
+      "character": "marty",
+      "label": "Marty",
+      "color": [
+        200,
+        60,
+        50
+      ]
+    },
+    {
+      "id": "doc-mind",
+      "character": "doc",
+      "label": "Doc",
+      "color": [
+        90,
+        90,
+        200
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "BTTF2",
+      "label": "Back to the Future Part II"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "BTTF2",
+      "title": "Back to the Future Part II",
+      "universes": [
+        {
+          "id": "HV",
+          "label": "Hill Valley - one mutable world",
+          "origin": {
+            "kind": "initial"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "marty",
+          "character": "marty",
+          "universe": "HV",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "doc",
+          "character": "doc",
+          "universe": "HV",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "biff-young",
+          "character": "biff",
+          "universe": "HV",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "biff-old",
+          "character": "old-biff",
+          "universe": "HV",
+          "native_to_universe": true,
+          "provenance": "native"
+        }
+      ],
+      "revisions": [
+        {
+          "id": "rA",
+          "label": "original history (the one we left 1985 in)",
+          "supersedes": null
+        },
+        {
+          "id": "rB",
+          "label": "almanac-given history - alt-1985",
+          "supersedes": "rA"
+        },
+        {
+          "id": "rC",
+          "label": "almanac burned - history restoring",
+          "supersedes": "rB"
+        }
+      ],
+      "events": [
+        {
+          "id": "e-depart85",
+          "kind": "start",
+          "universe": "HV",
+          "revision": "rA",
+          "story_order": 0,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1985,
+            "unit": "year"
+          },
+          "label": "October 26 1985 - the three depart for 2015",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Departure scene",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-arrive2015",
+          "kind": "entry",
+          "universe": "HV",
+          "revision": "rA",
+          "story_order": 10,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2015,
+            "unit": "year"
+          },
+          "label": "October 21 2015 - arrival; Marty buys the almanac; Biff-2015 steals it",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "2015 sequences",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-biff-leap",
+          "kind": "anchor",
+          "universe": "HV",
+          "revision": "rB",
+          "story_order": 20,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1955,
+            "unit": "year"
+          },
+          "label": "November 12 1955 - Old Biff gives young Biff the almanac; history supersedes to rB",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Almanac handover",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-alt1985",
+          "kind": "entry",
+          "universe": "HV",
+          "revision": "rB",
+          "story_order": 30,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1985,
+            "unit": "year"
+          },
+          "label": "alt-1985 - Biff's world: George dead, Lorraine remarried; the return leg lands them here",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Alt-1985 arrival",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-return1955",
+          "kind": "anchor",
+          "universe": "HV",
+          "revision": "rB",
+          "story_order": 40,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1955,
+            "unit": "year"
+          },
+          "label": "November 12 1955 (rB) - Marty and Doc arrive to steal the almanac back",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Return to 1955",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-burn",
+          "kind": "outcome",
+          "universe": "HV",
+          "revision": "rC",
+          "story_order": 50,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1955,
+            "unit": "year"
+          },
+          "label": "The almanac burns - history begins restoring (rC)",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Almanac burning",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-doc-struck",
+          "kind": "cutoff",
+          "universe": "HV",
+          "revision": "rC",
+          "story_order": 60,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1955,
+            "unit": "year"
+          },
+          "label": "Doc is struck by lightning and sent to 1885 - cut to Part III",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Lightning strike ending",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [],
+      "merges": [],
+      "segments": [
+        {
+          "id": "seg-a",
+          "universe": "HV",
+          "revision": "rA",
+          "from": "e-depart85",
+          "to": "e-arrive2015",
+          "label": "rA - original history"
+        },
+        {
+          "id": "seg-b",
+          "universe": "HV",
+          "revision": "rB",
+          "from": "e-biff-leap",
+          "to": "e-return1955",
+          "label": "rB - the almanac years (supersedes rA)"
+        },
+        {
+          "id": "seg-c",
+          "universe": "HV",
+          "revision": "rC",
+          "from": "e-burn",
+          "to": "e-doc-struck",
+          "label": "rC - restoring"
+        }
+      ],
+      "beats": [
+        {
+          "id": "b-fax",
+          "segment": "seg-a",
+          "story_order": 12,
+          "text": "The fax from the future changes before their eyes - the first sign history can be rewritten in place",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Fax vanishing scene",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "b-erase",
+          "segment": "seg-c",
+          "story_order": 55,
+          "text": "Biff-2015 fades from existence as rC takes hold",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Biff fading in the alley",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "fates": [
+        {
+          "id": "f-george-rB",
+          "universe": "HV",
+          "instance": "marty",
+          "event": "e-alt1985",
+          "revision": "rB",
+          "status": "dead",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "George's gravestone in alt-1985",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-biff-rC",
+          "universe": "HV",
+          "instance": "biff-old",
+          "event": "e-burn",
+          "revision": "rC",
+          "status": "nonexistent",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Biff-2015 fades",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "thread": {
+        "traveller": "marty-mind",
+        "visits": [
+          {
+            "id": "mv0",
+            "traveller": "marty-mind",
+            "universe": "HV",
+            "revision": "rA",
+            "instance": "marty",
+            "entry": "e-depart85",
+            "exit": "e-arrive2015",
+            "passes": []
+          },
+          {
+            "id": "mv1",
+            "traveller": "marty-mind",
+            "universe": "HV",
+            "revision": "rB",
+            "instance": "marty",
+            "entry": "e-alt1985",
+            "exit": "e-return1955",
+            "passes": []
+          },
+          {
+            "id": "mv2",
+            "traveller": "marty-mind",
+            "universe": "HV",
+            "revision": "rC",
+            "instance": "marty",
+            "entry": "e-burn",
+            "exit": "e-doc-struck",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "mv0",
+            "to_visit": "mv1",
+            "kind": "revision",
+            "revision": "rB"
+          },
+          {
+            "from_visit": "mv1",
+            "to_visit": "mv2",
+            "kind": "revision",
+            "revision": "rC"
+          }
+        ]
+      },
+      "layout": {
+        "lane_order": [
+          "HV"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "Old Biff's return leg (2015 -> unchanged 2015) is unexplained in the film and not charted",
+        "Marty and Doc present in 1955 twice simultaneously across rA/rB is the known P2 cost (OPEN_ISSUES.md)",
+        "Jennifer's 1985A porch rescue is omitted from this fixture (known v2.2 gap, unchanged)"
+      ]
+    }
+  ]
+}

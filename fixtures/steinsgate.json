@@ -1,0 +1,445 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "steins-gate",
+  "interpretation_rules": "none",
+  "validation_profile": "evidence_pending",
+  "graph_links": [],
+  "extensions": {},
+  "meta": {
+    "title": "Steins;Gate",
+    "subtitle": "Worldline shifts with divergence metric - Okabe's Reading Steiner carries memory across",
+    "footer": "Worldlines are revisions of one world; divergence values gate convergence (attractor field).",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "Steins;Gate (2011), theatrical cut",
+      "kind": "canon_statement",
+      "text": "Okabe alone remembers prior worldlines (Reading Steiner). The D-Mail chain shifts worldlines: beta (Mayuri dies) to alpha (Kurisu dies, SERN dystopia). Each shift rewrites the single world; bodies do not travel - only his memory crosses. The 1% barrier separates attractor fields; reaching divergence >1% lands the Steins Gate worldline where both survive."
+    },
+    {
+      "id": "allocation",
+      "title": "Fixture allocations",
+      "kind": "test_fixture",
+      "text": "Worldlines modeled as revisions: rBETA (original), rALPHA (post-D-Mail attractor field alpha), rSTEINS (divergence 1.048596). Divergence values recorded on revision objects as allocated test data. Kurisu's apparent death in rBETA is 'unknown' fate (she is saved in rSTEINS - same world, different revision)."
+    }
+  ],
+  "characters": [
+    {
+      "id": "okabe",
+      "label": "Rintaro Okabe"
+    },
+    {
+      "id": "kurisu",
+      "label": "Kurisu Makise"
+    },
+    {
+      "id": "mayuri",
+      "label": "Mayuri Shiina"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "okabe-mind",
+      "character": "okabe",
+      "label": "Okabe (Reading Steiner)",
+      "color": [
+        60,
+        130,
+        60
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "SG",
+      "label": "Steins;Gate"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "SG",
+      "title": "Steins;Gate",
+      "universes": [
+        {
+          "id": "W",
+          "label": "One mutable worldline",
+          "origin": {
+            "kind": "initial"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "okabe",
+          "character": "okabe",
+          "universe": "W",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "kurisu",
+          "character": "kurisu",
+          "universe": "W",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "mayuri",
+          "character": "mayuri",
+          "universe": "W",
+          "native_to_universe": true,
+          "provenance": "native"
+        }
+      ],
+      "revisions": [
+        {
+          "id": "rBETA",
+          "label": "beta - Kurisu found dead; Mayuri alive",
+          "supersedes": null,
+          "divergence": {
+            "value": -0.31943,
+            "unit": "divergence"
+          }
+        },
+        {
+          "id": "rALPHA",
+          "label": "alpha - D-Mail chain; Mayuri dies, SERN dystopia",
+          "supersedes": "rBETA",
+          "divergence": {
+            "value": 0.571024,
+            "unit": "divergence"
+          }
+        },
+        {
+          "id": "rSTEINS",
+          "label": "Steins Gate - divergence 1.048596; both survive",
+          "supersedes": "rALPHA",
+          "divergence": {
+            "value": 1.048596,
+            "unit": "divergence"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "e-kurisu",
+          "kind": "start",
+          "universe": "W",
+          "revision": "rBETA",
+          "story_order": 0,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "July 2010 day"
+          },
+          "label": "Kurisu found in a pool of blood - the beta worldline begins",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Opening discovery",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-dmail",
+          "kind": "anchor",
+          "universe": "W",
+          "revision": "rALPHA",
+          "story_order": 10,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "July 2010 day"
+          },
+          "label": "The first D-Mail crosses to the past - worldline shifts to alpha",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "D-Mail #1",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-mayuri",
+          "kind": "cutoff",
+          "universe": "W",
+          "revision": "rALPHA",
+          "story_order": 20,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "August 2010 day"
+          },
+          "label": "Mayuri dies again and again - alpha's attractor converges on her death",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Mayuri death loop",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-undone",
+          "kind": "anchor",
+          "universe": "W",
+          "revision": "rBETA",
+          "story_order": 30,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "August 2010 day"
+          },
+          "label": "D-Mails undone one by one - back to beta; now Mayuri is doomed instead",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Alpha undo sequence",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-operation-skuld",
+          "kind": "outcome",
+          "universe": "W",
+          "revision": "rSTEINS",
+          "story_order": 40,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "July 2010 day"
+          },
+          "label": "Operation Skuld - the lie that fools the world; divergence passes 1%",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Operation Skuld",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "W",
+          "revision": "rSTEINS",
+          "story_order": 50,
+          "world_time": {
+            "clock": "calendar",
+            "value": 28,
+            "unit": "August 2010 day"
+          },
+          "label": "Steins Gate - Kurisu alive, Mayuri alive, no SERN dystopia",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final scene",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [],
+      "merges": [],
+      "segments": [
+        {
+          "id": "seg-beta",
+          "universe": "W",
+          "revision": "rBETA",
+          "from": "e-kurisu",
+          "to": "e-kurisu",
+          "label": "beta - the world as first seen"
+        },
+        {
+          "id": "seg-alpha",
+          "universe": "W",
+          "revision": "rALPHA",
+          "from": "e-dmail",
+          "to": "e-mayuri",
+          "label": "alpha - SERN's shadow"
+        },
+        {
+          "id": "seg-steins",
+          "universe": "W",
+          "revision": "rSTEINS",
+          "from": "e-operation-skuld",
+          "to": "e-end",
+          "label": "Steins Gate - past the 1% barrier"
+        }
+      ],
+      "beats": [
+        {
+          "id": "b-rs",
+          "segment": "seg-alpha",
+          "story_order": 15,
+          "text": "Only Okabe carries memory across the shift - Reading Steiner as the sole continuity",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Worldline shift montage",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "b-lie",
+          "segment": "seg-steins",
+          "story_order": 45,
+          "text": "He lies to the world about Kurisu's death - the deception that shifts the field",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "The lie",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "fates": [
+        {
+          "id": "f-kurisu-beta",
+          "universe": "W",
+          "instance": "kurisu",
+          "event": "e-kurisu",
+          "revision": "rBETA",
+          "status": "unknown",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Blood pool - fate ambiguous until rSTEINS",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-mayuri-alpha",
+          "universe": "W",
+          "instance": "mayuri",
+          "event": "e-mayuri",
+          "revision": "rALPHA",
+          "status": "dead",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Alpha convergence",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-kurisu-steins",
+          "universe": "W",
+          "instance": "kurisu",
+          "event": "e-end",
+          "revision": "rSTEINS",
+          "status": "alive",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final scene",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-mayuri-steins",
+          "universe": "W",
+          "instance": "mayuri",
+          "event": "e-end",
+          "revision": "rSTEINS",
+          "status": "alive",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final scene",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "thread": {
+        "traveller": "okabe-mind",
+        "visits": [
+          {
+            "id": "ov0",
+            "traveller": "okabe-mind",
+            "universe": "W",
+            "revision": "rBETA",
+            "instance": "okabe",
+            "entry": "e-kurisu",
+            "exit": "e-kurisu",
+            "passes": []
+          },
+          {
+            "id": "ov1",
+            "traveller": "okabe-mind",
+            "universe": "W",
+            "revision": "rALPHA",
+            "instance": "okabe",
+            "entry": "e-dmail",
+            "exit": "e-mayuri",
+            "passes": []
+          },
+          {
+            "id": "ov2",
+            "traveller": "okabe-mind",
+            "universe": "W",
+            "revision": "rBETA",
+            "instance": "okabe",
+            "entry": "e-undone",
+            "exit": "e-undone",
+            "passes": []
+          },
+          {
+            "id": "ov3",
+            "traveller": "okabe-mind",
+            "universe": "W",
+            "revision": "rSTEINS",
+            "instance": "okabe",
+            "entry": "e-operation-skuld",
+            "exit": "e-end",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "ov0",
+            "to_visit": "ov1",
+            "kind": "revision",
+            "revision": "rALPHA"
+          },
+          {
+            "from_visit": "ov1",
+            "to_visit": "ov2",
+            "kind": "revision",
+            "revision": "rBETA"
+          },
+          {
+            "from_visit": "ov2",
+            "to_visit": "ov3",
+            "kind": "revision",
+            "revision": "rSTEINS"
+          }
+        ]
+      },
+      "layout": {
+        "lane_order": [
+          "W"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "No physical transfers: every crossing is a memory-only revision link (E118/R8 semantics)",
+        "Divergence values are fixture allocations keyed to canon numbers",
+        "Attractor-field convergence (why Mayuri always dies in alpha) is canon constraint, not mechanism - charted as the death loop cutoff"
+      ]
+    }
+  ]
+}

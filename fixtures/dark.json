@@ -1,0 +1,595 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "dark",
+  "interpretation_rules": "none",
+  "validation_profile": "evidence_pending",
+  "graph_links": [],
+  "extensions": {},
+  "meta": {
+    "title": "Dark",
+    "subtitle": "Knot topology - Winden eras linked by the cave corridor",
+    "footer": "Bootstrap genealogy (Charlotte/Elisabeth) recorded; cycle support OPEN (E244/genealogy).",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "Dark S1-S3 (Netflix)",
+      "kind": "canon_statement",
+      "text": "Winden's cave connects 1920, 1953, 1986, 2019, 2053. Jonas travels between eras; Martha dies in 2019 (S2) and an alternate Martha saves Jonas (S3). The Unknown exists across eras. Charlotte is Elisabeth's daughter; Elisabeth is Charlotte's daughter - a bootstrap pair. Adam (old Jonas) and Eva orchestrate the knot; S3 ends with the origin world deleting both knot worlds."
+    },
+    {
+      "id": "allocation",
+      "title": "Fixture allocations",
+      "kind": "test_fixture",
+      "text": "Eras are charted as lanes (preexisting). Cave trips are transfers (time_travel, body). The Charlotte/Elisabeth bootstrap is recorded as genealogy edges + a closed cycle object per schema; render support for cycles is OPEN (E244). The origin-world deletion is a beat, not a universe split (knot worlds preexist)."
+    }
+  ],
+  "characters": [
+    {
+      "id": "jonas",
+      "label": "Jonas"
+    },
+    {
+      "id": "martha",
+      "label": "Martha"
+    },
+    {
+      "id": "charlotte",
+      "label": "Charlotte"
+    },
+    {
+      "id": "elisabeth",
+      "label": "Elisabeth"
+    },
+    {
+      "id": "adam",
+      "label": "Adam"
+    },
+    {
+      "id": "eva",
+      "label": "Eva"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "jonas-mind",
+      "character": "jonas",
+      "label": "Jonas",
+      "color": [
+        70,
+        70,
+        75
+      ]
+    },
+    {
+      "id": "martha2-mind",
+      "character": "martha",
+      "label": "Martha (alt)",
+      "color": [
+        150,
+        40,
+        60
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "DARK",
+      "label": "Dark - the knot"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "DARK",
+      "title": "Dark - the knot",
+      "universes": [
+        {
+          "id": "E1919",
+          "label": "1920/1921 Winden",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "E1953",
+          "label": "1953/1954 Winden",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "E1986",
+          "label": "1986/1987 Winden",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "E2019",
+          "label": "2019/2020 Winden",
+          "origin": {
+            "kind": "initial"
+          }
+        },
+        {
+          "id": "E2052",
+          "label": "2052/2053 Winden",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "jonas-2019",
+          "character": "jonas",
+          "universe": "E2019",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "jonas-2052",
+          "character": "jonas",
+          "universe": "E2052",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "jonas-1986",
+          "character": "jonas",
+          "universe": "E1986",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "martha2-2019",
+          "character": "martha",
+          "universe": "E2019",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "charlotte-2019",
+          "character": "charlotte",
+          "universe": "E2019",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "elisabeth-2019",
+          "character": "elisabeth",
+          "universe": "E2019",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "charlotte-2052",
+          "character": "charlotte",
+          "universe": "E2052",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "elisabeth-2052",
+          "character": "elisabeth",
+          "universe": "E2052",
+          "native_to_universe": true,
+          "provenance": "native"
+        }
+      ],
+      "genealogy": [
+        {
+          "id": "g1",
+          "parent": "charlotte-2019",
+          "child": "elisabeth-2019",
+          "kind": "biological",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2 reveal - Charlotte is Elisabeth's mother",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "g2",
+          "parent": "elisabeth-2052",
+          "child": "charlotte-2052",
+          "kind": "biological",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S3 reveal - the baby carried back is Charlotte",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "genealogy_cycles": [
+        {
+          "id": "gc-bootstrap",
+          "edges": [
+            "g1",
+            "g2"
+          ],
+          "note": "Charlotte mothers Elisabeth; Elisabeth mothers Charlotte. Closed bootstrap pair.",
+          "kind": "bootstrap",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S3 bootstrap reveal",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "e-j2019",
+          "kind": "start",
+          "universe": "E2019",
+          "story_order": 0,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2019,
+            "unit": "year"
+          },
+          "label": "Jonas returns to 2019 after the bunker - Mikkel is lost in 1986",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S1",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-cave-2052",
+          "kind": "exit",
+          "universe": "E2019",
+          "story_order": 10,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2019,
+            "unit": "year"
+          },
+          "label": "Jonas enters the cave heading to the future",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S1 finale",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-j2052",
+          "kind": "entry",
+          "universe": "E2052",
+          "story_order": 20,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2052,
+            "unit": "year"
+          },
+          "label": "Jonas arrives in 2052 - the wasteland, survivors, young Charlotte leads them",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2 opening",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-cave-back",
+          "kind": "exit",
+          "universe": "E2052",
+          "story_order": 30,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2052,
+            "unit": "year"
+          },
+          "label": "Jonas leaves 2052 via the corridor",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-j1986",
+          "kind": "entry",
+          "universe": "E1986",
+          "story_order": 40,
+          "world_time": {
+            "clock": "calendar",
+            "value": 1986,
+            "unit": "year"
+          },
+          "label": "Jonas arrives 1986 - meets the 1986 strand of the knot",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-m-death",
+          "kind": "cutoff",
+          "universe": "E2019",
+          "story_order": 50,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2020,
+            "unit": "year"
+          },
+          "label": "Adam (old Jonas) kills Martha in 2019/2020 - the knot's hinge",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2 finale",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-m2-save",
+          "kind": "entry",
+          "universe": "E2019",
+          "story_order": 60,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2020,
+            "unit": "year"
+          },
+          "label": "Alternate Martha arrives - saves Jonas moments after Martha's death",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S3 opening",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "E2019",
+          "story_order": 70,
+          "world_time": {
+            "clock": "calendar",
+            "value": 2020,
+            "unit": "year"
+          },
+          "label": "The origin world erases both knot worlds - Hannah and Daniel at the lake",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S3 finale",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [
+        {
+          "id": "tr-j-2019-2052",
+          "traveller": "jonas-mind",
+          "from": {
+            "universe": "E2019",
+            "exit": "e-cave-2052"
+          },
+          "to": {
+            "universe": "E2052",
+            "entry": "e-j2052"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "tr-j-2052-1986",
+          "traveller": "jonas-mind",
+          "from": {
+            "universe": "E2052",
+            "exit": "e-cave-back"
+          },
+          "to": {
+            "universe": "E1986",
+            "entry": "e-j1986"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "tr-m2-save",
+          "traveller": "martha2-mind",
+          "from": {
+            "universe": "E1986",
+            "exit": "e-j1986"
+          },
+          "to": {
+            "universe": "E2019",
+            "entry": "e-m2-save"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        }
+      ],
+      "merges": [],
+      "segments": [
+        {
+          "id": "seg-2019",
+          "universe": "E2019",
+          "from": "e-j2019",
+          "to": "e-cave-2052",
+          "label": "2019 - the loop tightens"
+        },
+        {
+          "id": "seg-2052",
+          "universe": "E2052",
+          "from": "e-j2052",
+          "to": "e-cave-back",
+          "label": "2052 - the wasteland"
+        },
+        {
+          "id": "seg-1986",
+          "universe": "E1986",
+          "from": "e-j1986",
+          "to": "e-j1986",
+          "label": "1986 - corridor stop"
+        }
+      ],
+      "beats": [
+        {
+          "id": "b-boot",
+          "segment": "seg-2019",
+          "story_order": 5,
+          "text": "Charlotte holds baby Elisabeth; decades later Elisabeth carries baby Charlotte back - the pair bootstrap themselves",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2/S3 genealogy reveals",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "b-knot",
+          "segment": "seg-2019",
+          "story_order": 65,
+          "text": "Eva's world and Adam's world are two faces of one knot; the origin world deletes both",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S3 finale",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "fates": [
+        {
+          "id": "f-martha",
+          "universe": "E2019",
+          "instance": "martha2-2019",
+          "event": "e-m-death",
+          "status": "dead",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "S2 finale",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-jonas-end",
+          "universe": "E2019",
+          "instance": "jonas-2019",
+          "event": "e-end",
+          "status": "nonexistent",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Erased with the knot",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "thread": {
+        "traveller": "jonas-mind",
+        "visits": [
+          {
+            "id": "jv0",
+            "traveller": "jonas-mind",
+            "universe": "E2019",
+            "entry": "e-j2019",
+            "exit": "e-cave-2052",
+            "passes": []
+          },
+          {
+            "id": "jv1",
+            "traveller": "jonas-mind",
+            "universe": "E2052",
+            "entry": "e-j2052",
+            "exit": "e-cave-back",
+            "passes": []
+          },
+          {
+            "id": "jv2",
+            "traveller": "jonas-mind",
+            "universe": "E1986",
+            "entry": "e-j1986",
+            "exit": "e-j1986",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "jv0",
+            "to_visit": "jv1",
+            "kind": "transfer",
+            "transfer": "tr-j-2019-2052"
+          },
+          {
+            "from_visit": "jv1",
+            "to_visit": "jv2",
+            "kind": "transfer",
+            "transfer": "tr-j-2052-1986"
+          }
+        ]
+      },
+      "additional_threads": [
+        {
+          "traveller": "martha2-mind",
+          "visits": [
+            {
+              "id": "mv0",
+              "traveller": "martha2-mind",
+              "universe": "E2019",
+              "entry": "e-m2-save",
+              "exit": "e-end",
+              "passes": []
+            }
+          ],
+          "links": []
+        }
+      ],
+      "layout": {
+        "lane_order": [
+          "E1919",
+          "E1953",
+          "E1986",
+          "E2019",
+          "E2052"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "E1919 and E1953 lanes charted but unused by the fixture's events (corridor exists; trips omitted for size)",
+        "Adam/Eva orchestrations are beats, not mechanisms",
+        "The origin-world deletion is terminal, not a split"
+      ]
+    }
+  ]
+}

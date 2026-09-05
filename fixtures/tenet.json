@@ -1,0 +1,567 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "tenet",
+  "interpretation_rules": "none",
+  "validation_profile": "evidence_pending",
+  "graph_links": [],
+  "extensions": {},
+  "meta": {
+    "title": "Tenet",
+    "subtitle": "Per-traveller direction; turnstiles fork forward and inverted strands",
+    "footer": "Inverted strands charted as separate lanes; coexistence intervals marked. Pincer coordination OPEN (E258).",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "Tenet (2020), theatrical cut",
+      "kind": "canon_statement",
+      "text": "Turnstiles invert a traveller's time direction. The Protagonist recruits Neil; they run a temporal pincer on Stalsk-12 (red team forward, blue team inverted, 10-minute offset). Neil is revealed as the soldier who died saving the Protagonist at the Kyiv opera - an inverted strand from the future. The Algorithm is assembled and hidden in the past."
+    },
+    {
+      "id": "allocation",
+      "title": "Fixture allocations",
+      "kind": "test_fixture",
+      "text": "Inverted passage is modelled as a transfer with mechanism time_travel between lane Forward and lane Inverted; the same body exists twice during overlap windows (temporal pincer). Boundary double-count (E257) is a KNOWN OPEN ISSUE - both exit and entry are charted as separate events here."
+    }
+  ],
+  "characters": [
+    {
+      "id": "prot",
+      "label": "The Protagonist"
+    },
+    {
+      "id": "neil",
+      "label": "Neil"
+    },
+    {
+      "id": "kat",
+      "label": "Kat"
+    },
+    {
+      "id": "sator",
+      "label": "Sator"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "prot-mind",
+      "character": "prot",
+      "label": "Protagonist",
+      "color": [
+        40,
+        90,
+        160
+      ]
+    },
+    {
+      "id": "neil-mind",
+      "character": "neil",
+      "label": "Neil",
+      "color": [
+        160,
+        60,
+        90
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "TNT",
+      "label": "Tenet"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "TNT",
+      "title": "Tenet",
+      "universes": [
+        {
+          "id": "FWD",
+          "label": "Forward flow (default)",
+          "origin": {
+            "kind": "initial"
+          }
+        },
+        {
+          "id": "INV",
+          "label": "Inverted flow (turnstile strands)",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "STALSK",
+          "label": "Stalsk-12 pincer battlefield",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "prot-fwd",
+          "character": "prot",
+          "universe": "FWD",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "prot-inv",
+          "character": "prot",
+          "universe": "INV",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "neil-fwd",
+          "character": "neil",
+          "universe": "FWD",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "neil-inv",
+          "character": "neil",
+          "universe": "INV",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "neil-stalsk",
+          "character": "neil",
+          "universe": "STALSK",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        }
+      ],
+      "events": [
+        {
+          "id": "e-opera",
+          "kind": "start",
+          "universe": "FWD",
+          "story_order": 0,
+          "world_time": null,
+          "label": "Kyiv opera siege - the Protagonist is saved by a soldier with a red token",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Opening siege",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-freeport",
+          "kind": "outcome",
+          "universe": "FWD",
+          "story_order": 10,
+          "world_time": null,
+          "label": "Oslo freeport - rotated-artwork fight with a masked inverted attacker",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Freeport fight",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-turn1",
+          "kind": "split",
+          "universe": "FWD",
+          "story_order": 20,
+          "world_time": null,
+          "label": "Tallinn turnstile - inversion crossing",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Tallinn highway + turnstile",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-inv-tallinn",
+          "kind": "entry",
+          "universe": "INV",
+          "story_order": 30,
+          "world_time": null,
+          "label": "Inverted: the Protagonist and Neil move backward from Tallinn to Oslo",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Inverted Tallinn-Oslo",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-inv-oslo",
+          "kind": "outcome",
+          "universe": "INV",
+          "story_order": 40,
+          "world_time": null,
+          "label": "Inverted arrival at Oslo - re-inversion through the freeport turnstile",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Oslo re-inversion",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-stalsk",
+          "kind": "split",
+          "universe": "FWD",
+          "story_order": 50,
+          "world_time": null,
+          "label": "Stalsk-12 - the temporal pincer begins (red forward, blue inverted)",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Stalsk-12 assault",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-neil-inv",
+          "kind": "entry",
+          "universe": "STALSK",
+          "story_order": 60,
+          "world_time": null,
+          "label": "Neil goes inverted with blue team",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Blue team deployment",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-neil-death",
+          "kind": "cutoff",
+          "universe": "STALSK",
+          "story_order": 70,
+          "world_time": null,
+          "label": "Neil dies inside the tunnel - already dead when the Protagonist arrives",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Tunnel death + reveal",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "FWD",
+          "story_order": 80,
+          "world_time": null,
+          "label": "The Algorithm's parts are scattered into the past; the Protagonist walks away",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Ending",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [
+        {
+          "event": "e-turn1",
+          "cause": "branch",
+          "automatic": false,
+          "traveller": "prot-mind",
+          "source_disposition": "continues",
+          "outcomes": {
+            "+": {
+              "universe": "FWD",
+              "entry": "e-freeport",
+              "universe_outcome": "continues",
+              "character_outcomes": [
+                {
+                  "instance": "prot-fwd",
+                  "outcome": "continues",
+                  "fate": "keeps moving forward"
+                }
+              ]
+            },
+            "-": {
+              "universe": "INV",
+              "entry": "e-inv-tallinn",
+              "universe_outcome": "continues",
+              "character_outcomes": [
+                {
+                  "instance": "prot-inv",
+                  "outcome": "continues",
+                  "fate": "inverted strand"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "event": "e-stalsk",
+          "cause": "branch",
+          "automatic": false,
+          "traveller": "neil-mind",
+          "source_disposition": "continues",
+          "outcomes": {
+            "+": {
+              "universe": "FWD",
+              "entry": "e-end",
+              "universe_outcome": "continues",
+              "character_outcomes": [
+                {
+                  "instance": "neil-fwd",
+                  "outcome": "continues",
+                  "fate": "remains forward"
+                }
+              ]
+            },
+            "-": {
+              "universe": "STALSK",
+              "entry": "e-neil-inv",
+              "universe_outcome": "continues",
+              "character_outcomes": [
+                {
+                  "instance": "neil-stalsk",
+                  "outcome": "dies",
+                  "fate": "dies in the tunnel, inverted"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "id": "tr-prot-inv",
+          "traveller": "prot-mind",
+          "from": {
+            "universe": "FWD",
+            "exit": "e-turn1"
+          },
+          "to": {
+            "universe": "INV",
+            "entry": "e-inv-tallinn"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "tr-prot-back",
+          "traveller": "prot-mind",
+          "from": {
+            "universe": "INV",
+            "exit": "e-inv-oslo"
+          },
+          "to": {
+            "universe": "FWD",
+            "entry": "e-freeport"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "tr-neil-stalsk",
+          "traveller": "neil-mind",
+          "from": {
+            "universe": "INV",
+            "exit": "e-inv-oslo"
+          },
+          "to": {
+            "universe": "STALSK",
+            "entry": "e-neil-inv"
+          },
+          "mechanism": "time_travel",
+          "relation": {
+            "kind": "different_universes"
+          }
+        }
+      ],
+      "merges": [],
+      "segments": [
+        {
+          "id": "seg-fwd",
+          "universe": "FWD",
+          "from": "e-opera",
+          "to": "e-end",
+          "label": "Forward - recruitment to the Algorithm"
+        },
+        {
+          "id": "seg-inv",
+          "universe": "INV",
+          "from": "e-inv-tallinn",
+          "to": "e-inv-oslo",
+          "label": "Inverted strand - Tallinn to Oslo backward"
+        },
+        {
+          "id": "seg-stalsk",
+          "universe": "STALSK",
+          "from": "e-neil-inv",
+          "to": "e-neil-death",
+          "label": "Stalsk-12 - blue team"
+        }
+      ],
+      "beats": [
+        {
+          "id": "b-token",
+          "segment": "seg-fwd",
+          "story_order": 5,
+          "text": "The red token - proof the future sent someone back",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Token handover",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "b-pincer",
+          "segment": "seg-stalsk",
+          "story_order": 65,
+          "text": "Red and blue teams exchange intel at the offset midpoint",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Pincer coordination",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "fates": [
+        {
+          "id": "f-neil-stalsk",
+          "universe": "STALSK",
+          "instance": "neil-stalsk",
+          "event": "e-neil-death",
+          "status": "dead",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Tunnel death",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-prot-fwd",
+          "universe": "FWD",
+          "instance": "prot-fwd",
+          "event": "e-end",
+          "status": "alive",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final walk",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "thread": {
+        "traveller": "prot-mind",
+        "visits": [
+          {
+            "id": "pv0",
+            "traveller": "prot-mind",
+            "universe": "FWD",
+            "entry": "e-opera",
+            "exit": "e-turn1",
+            "passes": []
+          },
+          {
+            "id": "pv1",
+            "traveller": "prot-mind",
+            "universe": "INV",
+            "entry": "e-inv-tallinn",
+            "exit": "e-inv-oslo",
+            "passes": []
+          },
+          {
+            "id": "pv2",
+            "traveller": "prot-mind",
+            "universe": "FWD",
+            "entry": "e-freeport",
+            "exit": "e-end",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "pv0",
+            "to_visit": "pv1",
+            "kind": "transfer",
+            "transfer": "tr-prot-inv"
+          },
+          {
+            "from_visit": "pv1",
+            "to_visit": "pv2",
+            "kind": "transfer",
+            "transfer": "tr-prot-back"
+          }
+        ]
+      },
+      "additional_threads": [
+        {
+          "traveller": "neil-mind",
+          "visits": [
+            {
+              "id": "nv0",
+              "traveller": "neil-mind",
+              "universe": "FWD",
+              "entry": "e-freeport",
+              "exit": "e-stalsk",
+              "passes": []
+            },
+            {
+              "id": "nv1",
+              "traveller": "neil-mind",
+              "universe": "STALSK",
+              "entry": "e-neil-inv",
+              "exit": "e-neil-death",
+              "passes": []
+            }
+          ],
+          "links": [
+            {
+              "from_visit": "nv0",
+              "to_visit": "nv1",
+              "kind": "transfer",
+              "transfer": "tr-neil-stalsk"
+            }
+          ]
+        }
+      ],
+      "layout": {
+        "lane_order": [
+          "FWD",
+          "INV",
+          "STALSK"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "Inverted strand coexistence is not double-counted in counts (census prohibited)",
+        "Pincer coordination (E258) remains an OPEN ISSUE - links here are narrative, not semantically proven",
+        "Kat and Sator strands omitted from this fixture for size; the Algorithm bootstrap is annotated, not mechanized"
+      ]
+    }
+  ]
+}

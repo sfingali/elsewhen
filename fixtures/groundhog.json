@@ -1,0 +1,437 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "P3",
+  "interpretation_rules": "none",
+  "validation_profile": "evidence_pending",
+  "graph_links": [],
+  "extensions": {},
+  "meta": {
+    "title": "Groundhog Day",
+    "subtitle": "P3 closed loop - mind persists across resets",
+    "footer": "Iterations are revisions of one world, not universes.",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "Groundhog Day (1993), theatrical cut",
+      "kind": "canon_statement",
+      "text": "Phil relives February 2 in Punxsutawney. His body resets; his memory persists. The film represents three iterations (opening day, an exhausted stretch, the changed man) of an uncounted larger number. No other world exists; the loop ends when his day stops repeating."
+    },
+    {
+      "id": "allocation",
+      "title": "Fixture allocations",
+      "kind": "test_fixture",
+      "text": "Iteration count beyond the three represented days is unknown and labeled as such. Rita fates are tracked per represented iteration."
+    }
+  ],
+  "characters": [
+    {
+      "id": "phil",
+      "label": "Phil Connors"
+    },
+    {
+      "id": "rita",
+      "label": "Rita"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "phil-mind",
+      "character": "phil",
+      "label": "Phil (mind)",
+      "color": [
+        170,
+        80,
+        40
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "GHD",
+      "label": "Groundhog Day"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "GHD",
+      "title": "Groundhog Day",
+      "universes": [
+        {
+          "id": "U",
+          "label": "February 2, Punxsutawney",
+          "origin": {
+            "kind": "initial"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "phil-body",
+          "character": "phil",
+          "universe": "U",
+          "native_to_universe": true,
+          "provenance": "native",
+          "body": "phil-body"
+        },
+        {
+          "id": "rita-body",
+          "character": "rita",
+          "universe": "U",
+          "native_to_universe": true,
+          "provenance": "native",
+          "body": "rita-body"
+        }
+      ],
+      "revisions": [
+        {
+          "id": "r0",
+          "label": "February 2 - the day as it first repeats",
+          "supersedes": null
+        },
+        {
+          "id": "r1",
+          "label": "February 2 - the exhausted stretch (represented)",
+          "supersedes": "r0"
+        },
+        {
+          "id": "r2",
+          "label": "February 2 - the changed man; the loop ends",
+          "supersedes": "r1"
+        }
+      ],
+      "events": [
+        {
+          "id": "s0",
+          "kind": "start",
+          "universe": "U",
+          "revision": "r0",
+          "story_order": 0,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 2,
+            "unit": "February-day"
+          },
+          "label": "6:00 - Sonny & Cher; the day begins (first time)",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Opening morning",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "x0",
+          "kind": "cutoff",
+          "universe": "U",
+          "revision": "r0",
+          "story_order": 5,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 3,
+            "unit": "February-day"
+          },
+          "label": "6:00 reset - day repeats",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "First 6:00 wake-up repeat",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "s1",
+          "kind": "entry",
+          "universe": "U",
+          "revision": "r1",
+          "story_order": 10,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 2,
+            "unit": "February-day"
+          },
+          "label": "6:00 again - same day, carried memory",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Montage into exhaustion",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "x1",
+          "kind": "cutoff",
+          "universe": "U",
+          "revision": "r1",
+          "story_order": 15,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 3,
+            "unit": "February-day"
+          },
+          "label": "6:00 reset - day repeats",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Reset after despair stretch",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "s2",
+          "kind": "entry",
+          "universe": "U",
+          "revision": "r2",
+          "story_order": 20,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 2,
+            "unit": "February-day"
+          },
+          "label": "6:00 - he wakes changed",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final February 2",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "end",
+          "kind": "cutoff",
+          "universe": "U",
+          "revision": "r2",
+          "story_order": 25,
+          "world_time": {
+            "clock": "local-calendar",
+            "value": 3,
+            "unit": "February-day"
+          },
+          "label": "February 3 - the day no longer repeats",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Ending awakening",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [],
+      "merges": [],
+      "segments": [
+        {
+          "id": "seg-r0",
+          "universe": "U",
+          "revision": "r0",
+          "from": "s0",
+          "to": "x0",
+          "label": "First repetition"
+        },
+        {
+          "id": "seg-r1",
+          "universe": "U",
+          "revision": "r1",
+          "from": "s1",
+          "to": "x1",
+          "label": "The exhausted stretch (represented)"
+        },
+        {
+          "id": "seg-r2",
+          "universe": "U",
+          "revision": "r2",
+          "from": "s2",
+          "to": "end",
+          "label": "The changed man"
+        }
+      ],
+      "beats": [
+        {
+          "id": "b-learn",
+          "segment": "seg-r1",
+          "story_order": 12,
+          "text": "Interventions stop working; nothing carries over but him",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Exhaustion montage",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "b-rita",
+          "segment": "seg-r2",
+          "story_order": 22,
+          "text": "Rita sees the man he became in one day",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Final day with Rita",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "fates": [
+        {
+          "id": "f-phil-r0",
+          "universe": "U",
+          "instance": "phil-body",
+          "event": "x0",
+          "revision": "r0",
+          "status": "alive",
+          "cite": {
+            "source": "allocation",
+            "page": null,
+            "scene": null,
+            "locator": "Body resets with the day",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-phil-r1",
+          "universe": "U",
+          "instance": "phil-body",
+          "event": "x1",
+          "revision": "r1",
+          "status": "alive",
+          "cite": {
+            "source": "allocation",
+            "page": null,
+            "scene": null,
+            "locator": "Body resets with the day",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-phil-r2",
+          "universe": "U",
+          "instance": "phil-body",
+          "event": "end",
+          "revision": "r2",
+          "status": "alive",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Wakes on February 3",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-rita-r0",
+          "universe": "U",
+          "instance": "rita-body",
+          "event": "x0",
+          "revision": "r0",
+          "status": "alive",
+          "cite": {
+            "source": "allocation",
+            "page": null,
+            "scene": null,
+            "locator": "Rita in represented repetition 0",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-rita-r1",
+          "universe": "U",
+          "instance": "rita-body",
+          "event": "x1",
+          "revision": "r1",
+          "status": "alive",
+          "cite": {
+            "source": "allocation",
+            "page": null,
+            "scene": null,
+            "locator": "Rita in represented repetition 1",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "f-rita-r2",
+          "universe": "U",
+          "instance": "rita-body",
+          "event": "end",
+          "revision": "r2",
+          "status": "alive",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Rita in the final represented day",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "thread": {
+        "traveller": "phil-mind",
+        "visits": [
+          {
+            "id": "v0",
+            "traveller": "phil-mind",
+            "universe": "U",
+            "revision": "r0",
+            "instance": "phil-body",
+            "entry": "s0",
+            "exit": "x0",
+            "passes": []
+          },
+          {
+            "id": "v1",
+            "traveller": "phil-mind",
+            "universe": "U",
+            "revision": "r1",
+            "instance": "phil-body",
+            "entry": "s1",
+            "exit": "x1",
+            "passes": []
+          },
+          {
+            "id": "v2",
+            "traveller": "phil-mind",
+            "universe": "U",
+            "revision": "r2",
+            "instance": "phil-body",
+            "entry": "s2",
+            "exit": "end",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "v0",
+            "to_visit": "v1",
+            "kind": "revision",
+            "revision": "r1"
+          },
+          {
+            "from_visit": "v1",
+            "to_visit": "v2",
+            "kind": "revision",
+            "revision": "r2"
+          }
+        ]
+      },
+      "layout": {
+        "lane_order": [
+          "U"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "Unrepresented iterations exist but are not charted; counts are never invented",
+        "Memory-only traversal: Phil's body stays, his mind crosses revisions (R8: terminal continuity vs memory)"
+      ]
+    }
+  ]
+}
