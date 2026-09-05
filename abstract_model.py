@@ -15,6 +15,12 @@ legacy schema_v2 fixture via to_abstract.py.
 import json
 import sys
 
+try:
+    from profiles import resolve as _resolve, DEFAULTS as _PROFILE_KEYS
+except ImportError:  # run as a loose script
+    _resolve = None
+    _PROFILE_KEYS = {}
+
 MODEL = "universe-timeline/1.0"
 
 # Semantic only. origin kinds are story facts, not drawing instructions.
@@ -80,7 +86,26 @@ class AbstractStory:
             for f in g.get("fates", []):
                 if f.get("status") not in FATE_STATUSES:
                     errs.append(f"[{gid}] fate {f.get('id')}: unknown status {f.get('status')!r}")
+
+        # ---- profile parameter-set coherence ----
+        if _resolve is not None:
+            try:
+                params = self.profile_params()
+                if params.get("merges") == "forbidden":
+                    for g in doc.get("graphs", []):
+                        if g.get("merges", 0):
+                            errs.append(f"[{g.get('namespace')}] merges={g['merges']} but profile forbids actual merge")
+            except ValueError as exc:
+                errs.append(f"profile: {exc}")
         return errs
+
+    def profile_params(self):
+        """Resolve the model's profile to a fully-expanded parameter dict."""
+        if _resolve is None:
+            return {}
+        prof = self.doc.get("profile", {})
+        # accept {name|base, rules, params} or a plain name
+        return _resolve(prof if isinstance(prof, dict) and prof else prof)
 
     # ---- helpers ------------------------------------------------------
     def graph(self, namespace=None):
@@ -114,9 +139,15 @@ class AbstractStory:
         if doc.get("subtitle"):
             L.append(doc.get("subtitle"))
         prof = doc.get("profile", {})
-        prof_s = " · ".join(f"{k}={v}" for k, v in prof.items() if v)
-        if prof_s:
-            L.append("profile: " + prof_s)
+        prof_name = prof.get("name") if isinstance(prof, dict) else prof
+        params = self.profile_params()
+        if params:
+            L.append(f"profile: {prof_name or 'custom'} — parameter set")
+            for k, v in params.items():
+                shown = ", ".join(v) if isinstance(v, list) else v
+                L.append(f"    {k} = {shown}")
+        if isinstance(prof, dict) and prof.get("rules"):
+            L.append(f"    rules = {prof['rules']}")
         if doc.get("footer"):
             L.append("note: " + doc["footer"])
         L.append("")

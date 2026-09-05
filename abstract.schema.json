@@ -13,10 +13,11 @@
     "profile": {
       "type": "object",
       "properties": {
-        "interpretation": { "type": ["string", "null"] },
+        "name": { "type": "string" },
         "rules": { "type": ["string", "null"] },
-        "validation": { "type": ["string", "null"] }
-      }
+        "params": { "type": "object", "additionalProperties": true }
+      },
+      "required": ["name"]
     },
     "sources": { "type": "array", "items": { "type": "object" } },
     "characters": { "type": "array", "items": { "type": "object", "required": ["id"] } },
@@ -49,6 +50,7 @@
         "transfers": { "type": "array", "items": { "$ref": "#/$defs/transfer" } },
         "route": { "$ref": "#/$defs/route" },
         "fates": { "type": "array", "items": { "$ref": "#/$defs/fate" } },
+        "merges": { "type": "integer" },
         "assumptions": { "type": "array", "items": { "type": "string" } },
         "evidence": { "type": "array" }
       }

@@ -41,9 +41,11 @@ def main():
             for e in errs[:6]:
                 print("   " + e)
         else:
-            nw = len(abstract.get("worlds", []) or [])
             nw = sum(len(g.get("worlds", [])) for g in abstract.get("graphs", []))
-            print(f"PASS {name}: clean · {nw} worlds · wrote json/txt/dot/mmd/md")
+            p = story.profile_params()
+            p_s = " ".join(f"{k}={v if not isinstance(v, list) else '/'.join(v)}" for k, v in p.items())
+            print(f"PASS {name}: {nw} worlds · params[ {p_s} ]")
+            print(f"          -> wrote json/txt/dot/mmd/md")
     print(f"\n{len(FIXTURES) - fails}/{len(FIXTURES)} fixtures converted cleanly")
     sys.exit(1 if fails else 0)
 

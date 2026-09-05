@@ -17,6 +17,44 @@ presentation-agnostic model** — *what* happens, never *how* it's drawn.
 
 The coupling boundary is the **abstract model**, not any drawing.
 
+## Profiles are parameter sets
+
+An interpretation **profile is not a magic string** — it is a bundle of semantic
+parameters. The name (`P1`, `P2`, `P3`, `P4`, `tenet`, `dark`, `steins-gate`) is
+just a convenience handle; the real contract is the expanded parameter set in
+`profile.params`.
+
+```json
+"profile": {
+  "name": "P1",
+  "rules": "waif",
+  "params": {
+    "history_model": "universes",      // universes | revisions | iterations
+    "branching": "branch",             // branch | overwrite | undeclared
+    "coexistence": "coexisting",       // coexisting | single_active | undeclared
+    "time_mechanics": ["body", "consciousness"],
+    "joined_worlds": "preexist",       // preexist | not_preexist | undeclared
+    "turnstiles": "none",              // both_signs | single_sign | none
+    "protagonist_scope": "singular",   // singular | multiple
+    "axis": "story_order",             // story_order | world_time
+    "validation": "evidence_pending",
+    "merges": "forbidden",             // forbidden | apparent_reset | siblings
+    "genealogy": "acyclic"             // acyclic | bootstrap_cycles
+  }
+}
+```
+
+A **custom profile** is a preset plus overrides — no new name required:
+
+```python
+from profiles import resolve
+resolve({"name": "P1", "params": {"axis": "world_time", "turnstiles": "both_signs"}})
+```
+
+See `profiles.py` for the registry; `Profiles`/`resolve` expand any bundle, and
+the validator checks the model is coherent with its declared parameters (e.g. a
+film marked `merges: forbidden` cannot carry an actual merge).
+
 ## The abstract representation
 
 The model is a plain structure — worlds, events, splits, transfers, route,
@@ -25,7 +63,7 @@ it to any projector.
 
 ```
 THE WAIF — Ben's Story
-profile: interpretation=P1 · rules=waif · validation=evidence_pending
+profile: P1 (parameter set — universes · branch · coexisting · body/consciousness)
 
 # Graph BEN — Ben's Story
 Worlds:
@@ -66,6 +104,7 @@ python3 verify_abstract.py
 ```
 abstract_model.py     the AbstractStory model: load, validate, to_text
 abstract.schema.json  JSON Schema for the abstract model
+profiles.py           named profiles as parameter sets (+ resolve/overrides)
 projections.py        dot / mermaid / markdown projectors (+ dispatcher)
 to_abstract.py        schema_v2 -> abstract model importer + CLI
 verify_abstract.py    convert+validate+render harness for all fixtures

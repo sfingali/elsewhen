@@ -25,11 +25,7 @@ def convert(doc):
         "title": meta.get("title", "(untitled)"),
         "subtitle": meta.get("subtitle", ""),
         "footer": meta.get("footer", ""),
-        "profile": {
-            "interpretation": doc.get("interpretation_profile"),
-            "rules": doc.get("interpretation_rules"),
-            "validation": doc.get("validation_profile"),
-        },
+        "profile": _profile(doc),
         "sources": copy.deepcopy(doc.get("sources", [])),
         "characters": copy.deepcopy(_pluck(doc.get("characters", []), ("id", "label"))),
         # travellers: identity only; colour is presentation and is dropped
@@ -38,6 +34,24 @@ def convert(doc):
         "graphs": [_graph(g) for g in doc.get("graphs", [])],
     }
     return out
+
+
+def _profile(doc):
+    """Build the profile as an explicit parameter set (name + expanded params)."""
+    name = doc.get("interpretation_profile")
+    if not name:
+        return {}
+    try:
+        from profiles import resolve as _res
+        params = _res(name)
+    except Exception:
+        params = {}
+    if doc.get("validation_profile"):
+        params["validation"] = doc["validation_profile"]
+    prof = {"name": name, "params": params}
+    if doc.get("interpretation_rules"):
+        prof["rules"] = doc["interpretation_rules"]
+    return prof
 
 
 def _pluck(items, keys):
@@ -147,6 +161,7 @@ def _graph(g):
             {"id": f.get("id"), "universe": f.get("universe"), "instance": f.get("instance"), "event": f.get("event"), "status": f.get("status"), "cite": f.get("cite")}
             for f in g.get("fates", [])
         ],
+        "merges": len(g.get("merges") or []),
         "assumptions": copy.deepcopy(g.get("assumptions", [])),
         "evidence": evidence,
     }
