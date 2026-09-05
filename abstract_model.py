@@ -5,8 +5,7 @@ This is the engine's core. It describes WHAT the story's universe structure is
 — worlds and their origins, splits, transfers, the protagonist's route, fates,
 and citations — with NO opinion about HOW it is drawn. It carries no visual
 vocabulary: no glyphs, colours, lanes, dash-styles, density, timescale, or
-layout ordering. Any visual form (PIL chart, SVG, HTML, graphviz, mermaid,
-plain text, even video) is a *projection* of this model — see projections.py.
+layout ordering.
 
 Canonical input is the abstract JSON document (see abstract.schema.json), or a
 legacy schema_v2 fixture via to_abstract.py.
@@ -30,7 +29,7 @@ FATE_STATUSES = ("alive", "dead", "unknown", "nonexistent")
 
 
 class AbstractStory:
-    """A validated, projection-ready timeline model."""
+    """A validated, presentation-agnostic timeline model."""
 
     def __init__(self, doc):
         self.doc = doc
@@ -131,7 +130,7 @@ class AbstractStory:
 
         This is the canonical 'abstract textual representation' — pure
         structure, no drawing. It is not a chart; it is the thing a chart is
-        a projection of.
+        drawn from.
         """
         doc = self.doc
         L = []

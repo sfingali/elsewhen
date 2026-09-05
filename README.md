@@ -4,18 +4,21 @@ The **abstract engine** for multi-universe / time-travel timeline charts. Its
 whole job is one thing: to hold a film's universe structure as a **pure,
 presentation-agnostic model** — *what* happens, never *how* it's drawn.
 
+Anything that turns this model into a picture — a PIL chart, an SVG, an HTML
+page, a graphviz/mermaid graph, a video — is a **consumer** of the engine, not
+part of it. The engine only ever answers "what is the structure"; the rendering
+never touches this repo.
+
 - **Abstract core** (`abstract_model.py`, `abstract.schema.json`): worlds and
   their origins, events, splits (both tines + character fates), transfers, the
   protagonist's route, fates, and citations. Structurally semantic — no glyphs,
   colours, lanes, dash-styles, density, timescale, or layout ordering.
-- **Projections** (`projections.py`): render that model into *any* form —
-  graphviz DOT, mermaid, markdown, plain text are built in. The PIL chart and
-  Studio GUI are just more projections, reading the same model. Swap the
-  renderer, never touch the model.
+- **Profiles** (`profiles.py`): named interpretations as explicit parameter
+  sets — nothing hidden in a magic string.
+- **Validation** (`abstract_model.validate()` + the schema): structural and
+  coherence checks against the declared parameters.
 - **Import** (`to_abstract.py`): convert a legacy `schema_v2` document (or a
   compiled story JSON) into the abstract model.
-
-The coupling boundary is the **abstract model**, not any drawing.
 
 ## Profiles are parameter sets
 
@@ -51,15 +54,13 @@ from profiles import resolve
 resolve({"name": "P1", "params": {"axis": "world_time", "turnstiles": "both_signs"}})
 ```
 
-See `profiles.py` for the registry; `Profiles`/`resolve` expand any bundle, and
-the validator checks the model is coherent with its declared parameters (e.g. a
+The validator checks the model is coherent with its declared parameters (e.g. a
 film marked `merges: forbidden` cannot carry an actual merge).
 
 ## The abstract representation
 
 The model is a plain structure — worlds, events, splits, transfers, route,
-fates — all cited. It is the thing a chart is *about*. Read it as text, or feed
-it to any projector.
+fates — all cited. It is the thing a chart is *about*.
 
 ```
 THE WAIF — Ben's Story
@@ -86,16 +87,13 @@ Fates:  waif-u1 in U1 @ e-J  dead
 
 ```bash
 # Convert a legacy schema_v2 fixture into the abstract model
-python3 to_abstract.py fixtures/bens_story.json                 # -> abstract JSON
-python3 to_abstract.py fixtures/bens_story.json --text          # -> abstract text
-python3 to_abstract.py fixtures/bens_story.json --dot           # -> graphviz DOT
-python3 to_abstract.py fixtures/bens_story.json --mermaid       # -> mermaid
-python3 to_abstract.py fixtures/bens_story.json --markdown      # -> markdown
+python3 to_abstract.py fixtures/bens_story.json            # -> abstract JSON
+python3 to_abstract.py fixtures/bens_story.json --text     # -> abstract text
 
 # Validate + read any abstract model
 python3 abstract_model.py build/abstract/bens_story.json
 
-# Verify every fixture converts + renders all projections
+# Verify every fixture converts + validates
 python3 verify_abstract.py
 ```
 
@@ -105,16 +103,14 @@ python3 verify_abstract.py
 abstract_model.py     the AbstractStory model: load, validate, to_text
 abstract.schema.json  JSON Schema for the abstract model
 profiles.py           named profiles as parameter sets (+ resolve/overrides)
-projections.py        dot / mermaid / markdown projectors (+ dispatcher)
 to_abstract.py        schema_v2 -> abstract model importer + CLI
-verify_abstract.py    convert+validate+render harness for all fixtures
+verify_abstract.py    convert + validate harness for all fixtures
 
 fixtures/             6 film fixtures (the import corpus)
 references/           chart-language.md + method.md (the ontology + method)
 ```
 
-This is intentionally lean: abstract core + import corpus + the two ontology
-docs. The legacy v2.3 machinery (schema_v2.json, the E-code validator, the
-allocation compiler, the full SPEC) has been pruned from this repo — it lives on
-in the sibling visual repo `film-universe-timelines`, which owns the PIL renderer
-and Studio GUI.
+This is intentional and lean: **engine only** — abstract model + profiles +
+validation + import. No renderer, no projector, no visual vocabulary. Consumers
+(the PIL renderer, Studio, graphviz/mermaid projection) live in the sibling
+visual repo `film-universe-timelines` and read this model.

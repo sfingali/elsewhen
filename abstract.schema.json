@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/sfingali/film-universe-timelines-engine/abstract.schema.json",
   "title": "Abstract Universe Timeline",
-  "description": "Pure, presentation-agnostic model of a multi-universe timeline. Contains no visual vocabulary (no glyphs, colours, lanes, dash-styles, density, timescale, or layout ordering). Visual forms are projections of this model.",
+  "description": "Pure, presentation-agnostic model of a multi-universe timeline. Contains no visual vocabulary (no glyphs, colours, lanes, dash-styles, density, timescale, or layout ordering).",
   "type": "object",
   "required": ["abstract_model", "title", "graphs"],
   "properties": {

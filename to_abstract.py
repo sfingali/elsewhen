@@ -9,7 +9,7 @@ and traveller `color` are not story facts, so they do not survive the import.
 
 Usage:
   python3 to_abstract.py FIXTURE.json [--out abstract.json] [--text|--dot|--mermaid|--markdown]
-Without --out, (no projector) prints the abstract JSON.
+Without --out, prints the abstract JSON (or the abstract text with --text).
 """
 
 import copy
@@ -169,27 +169,24 @@ def _graph(g):
 
 def main(argv):
     if len(argv) < 2:
-        print("usage: to_abstract.py FIXTURE.json [--out F] [--text|--dot|--mermaid|--markdown]", file=sys.stderr)
+        print("usage: to_abstract.py FIXTURE.json [--out F] [--text]", file=sys.stderr)
         return 2
     path = argv[1]
     with open(path) as fh:
         doc = json.load(fh)
     abstract = convert(doc)
 
-    target = None
+    want_text = "--text" in argv[2:]
     out = None
     for a in argv[2:]:
-        if a in ("--text", "--dot", "--mermaid", "--markdown"):
-            target = a[2:]
-        elif a.startswith("--out="):
+        if a.startswith("--out="):
             out = a.split("=", 1)[1]
         elif a == "--out":
             out = argv[argv.index(a) + 1]
 
-    if target:
+    if want_text:
         from abstract_model import AbstractStory
-        from projections import render
-        text = render(AbstractStory.from_dict(abstract), target)
+        text = AbstractStory.from_dict(abstract).to_text()
         if out:
             with open(out, "w") as fh:
                 fh.write(text + "\n")

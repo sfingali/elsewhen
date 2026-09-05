@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Verify the abstract engine: convert every fixture to the abstract model,
-validate it, and render every projection (text, dot, mermaid, markdown)."""
+validate it, and emit its abstract text representation."""
 
 import glob
 import json
@@ -8,7 +8,6 @@ import os
 import sys
 
 from abstract_model import AbstractStory
-from projections import render
 from to_abstract import convert
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -30,9 +29,9 @@ def main():
         with open(base + ".json", "w") as fh:
             json.dump(abstract, fh, indent=2)
             fh.write("\n")
-        for target in ("text", "dot", "mermaid", "markdown"):
-            txt = render(story, target)
-            ext = {"text": "txt", "dot": "dot", "mermaid": "mmd", "markdown": "md"}[target]
+        for target in ("text",):
+            txt = story.to_text()
+            ext = {"text": "txt"}[target]
             with open(base + "." + ext, "w") as fh:
                 fh.write(txt + "\n")
         if errs:
@@ -45,7 +44,7 @@ def main():
             p = story.profile_params()
             p_s = " ".join(f"{k}={v if not isinstance(v, list) else '/'.join(v)}" for k, v in p.items())
             print(f"PASS {name}: {nw} worlds · params[ {p_s} ]")
-            print(f"          -> wrote json/txt/dot/mmd/md")
+            print(f"          -> wrote json/txt")
     print(f"\n{len(FIXTURES) - fails}/{len(FIXTURES)} fixtures converted cleanly")
     sys.exit(1 if fails else 0)
 
