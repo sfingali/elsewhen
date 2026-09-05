@@ -167,9 +167,24 @@ def _graph(g):
     }
 
 
+def _apply_profile(abstract, base, overrides):
+    """Resolve a profile into a base preset + explicit parameter overrides."""
+    from profiles import resolve
+    prof = abstract.get("profile") or {}
+    name = base or prof.get("name") or "P1"
+    merged = dict(prof.get("params", {}))
+    merged.update(overrides)
+    params = resolve({"name": name, "params": merged})
+    abstract["profile"] = {"name": name, "params": params}
+    if prof.get("rules"):
+        abstract["profile"]["rules"] = prof["rules"]
+    return abstract
+
+
 def main(argv):
     if len(argv) < 2:
-        print("usage: to_abstract.py FIXTURE.json [--out F] [--text]", file=sys.stderr)
+        print("usage: to_abstract.py FIXTURE.json [--out F] [--text] [--base PROFILE] [--set k=v ...]",
+              file=sys.stderr)
         return 2
     path = argv[1]
     with open(path) as fh:
@@ -178,11 +193,27 @@ def main(argv):
 
     want_text = "--text" in argv[2:]
     out = None
-    for a in argv[2:]:
+    base = None
+    overrides = {}
+    i = 0
+    while i < len(argv):
+        a = argv[i]
         if a.startswith("--out="):
             out = a.split("=", 1)[1]
         elif a == "--out":
-            out = argv[argv.index(a) + 1]
+            out = argv[i + 1]; i += 1
+        elif a == "--base":
+            base = argv[i + 1]; i += 1
+        elif a.startswith("--set="):
+            k, _, v = a[len("--set="):].partition("=")
+            overrides[k.strip()] = v.strip()
+        elif a == "--set":
+            k, _, v = argv[i + 1].partition("=")
+            overrides[k.strip()] = v.strip(); i += 1
+        i += 1
+
+    if base or overrides:
+        abstract = _apply_profile(abstract, base, overrides)
 
     if want_text:
         from abstract_model import AbstractStory

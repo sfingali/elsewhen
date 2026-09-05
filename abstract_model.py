@@ -90,13 +90,43 @@ class AbstractStory:
         if _resolve is not None:
             try:
                 params = self.profile_params()
+                known = set(_PROFILE_KEYS.keys())
+                for k in params:
+                    if k not in known:
+                        errs.append(f"profile: unknown parameter {k!r}")
                 if params.get("merges") == "forbidden":
                     for g in doc.get("graphs", []):
                         if g.get("merges", 0):
                             errs.append(f"[{g.get('namespace')}] merges={g['merges']} but profile forbids actual merge")
+                if params.get("history_model") == "revisions" and params.get("coexistence") == "coexisting":
+                    errs.append("profile: history_model=revisions cannot be coexistence=coexisting "
+                                "(use single_active or undeclared)")
+                if params.get("history_model") == "iterations":
+                    for g in doc.get("graphs", []):
+                        n = len(g.get("worlds", []))
+                        if n > 1:
+                            errs.append(f"[{g.get('namespace')}] history_model=iterations but {n} worlds — "
+                                        "an iteration loop is single-world")
             except ValueError as exc:
                 errs.append(f"profile: {exc}")
         return errs
+
+    def warnings(self):
+        """Non-fatal notes about the model / profile (soft, not errors)."""
+        notes = []
+        try:
+            params = self.profile_params()
+        except ValueError:
+            return notes
+        for g in self.doc.get("graphs", []):
+            if params.get("branching") == "branch" and not g.get("splits"):
+                notes.append(f"[{g.get('namespace')}] branching=branch but no splits — a branch model with no forks")
+            if params.get("genealogy") == "bootstrap_cycles" and params.get("validation") == "evidence_pending":
+                notes.append(f"[{g.get('namespace')}] genealogy=bootstrap_cycles with validation=evidence_pending "
+                             "— bootstrap causality is usually observed, not proof-branched")
+            if "signal" in (params.get("time_mechanics") or []):
+                notes.append(f"[{g.get('namespace')}] time_mechanics includes signal — signal transports no body")
+        return notes
 
     def profile_params(self):
         """Resolve the model's profile to a fully-expanded parameter dict."""

@@ -84,6 +84,35 @@ Route (ben-mind):  U1 → J+ → *2 → J- → *F
 Fates:  waif-u1 in U1 @ e-J  dead
 ```
 
+## Author a new film
+
+Use `author.py` to describe a film **directly in the abstract form** — no legacy
+JSON required:
+
+```python
+from author import Author
+
+st = Author("MY FILM — One Man's Story", profile="P1",
+            footer="Universe identity is separate from consciousness and character fate.")
+st.graph("G", "One man's story")
+st.add_world("U1", "The initial timeline", "initial")
+st.add_world("J-", "The dying tine", "born", born={"event": "e-J", "parent": "U1", "tine": "-"})
+st.add_event("e-start", "start", "U1", 0, "It begins")
+st.add_event("e-J", "split", "U1", 10, "The jump — the worlds split")
+st.add_split("e-J", "branch", "ben-mind", "U1", "continues",
+             st.add_outcome("U1", "e-start", "continues", [("i1", "continues", "survives")]),
+             st.add_outcome("J-", "e-start", "born", [("i2", "dies", "dies")]))
+st.set_profile("P1").set_params(axis="world_time")   # preset + override — a custom profile
+st.add_assumption("Ground truth: the screenplay with #N# scene markers.")
+st.to_file("film.abstract.json")
+print(st.validate())   # [] == clean
+print(st.to_text())    # the human-readable abstract form
+```
+
+`set_params(...)` derives a custom profile from a preset + overrides — no new
+magic name. `to_file` writes the abstract JSON; `to_text` the readable form;
+`validate()` the coherence problems.
+
 ## Usage
 
 ```bash
@@ -91,11 +120,15 @@ Fates:  waif-u1 in U1 @ e-J  dead
 python3 to_abstract.py fixtures/bens_story.json            # -> abstract JSON
 python3 to_abstract.py fixtures/bens_story.json --text     # -> abstract text
 
+# Derive a custom profile on import: preset + parameter overrides
+python3 to_abstract.py fixtures/tenet.json --base tenet --set axis=world_time --set turnstiles=none --text
+
 # Validate + read any abstract model
 python3 abstract_model.py build/abstract/bens_story.json
 
-# Verify every fixture converts + validates
+# Verify every fixture converts + validates, and run the unit tests
 python3 verify_abstract.py
+python3 tests/test_abstract.py
 ```
 
 ## Layout
@@ -104,8 +137,10 @@ python3 verify_abstract.py
 abstract_model.py     the AbstractStory model: load, validate, to_text
 abstract.schema.json  JSON Schema for the abstract model
 profiles.py           named profiles as parameter sets (+ resolve/overrides)
-to_abstract.py        schema_v2 -> abstract model importer + CLI
+author.py             programmatic builder to author an abstract model directly
+to_abstract.py        schema_v2 -> abstract model importer + CLI (--base/--set)
 verify_abstract.py    convert + validate harness for all fixtures
+tests/test_abstract.py  unit tests (validation + authoring + profiles)
 
 fixtures/             10 film fixtures (the import corpus — incl. the 4 diversity films)
 references/           chart-language.md + method.md (the ontology + method)
