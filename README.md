@@ -1,28 +1,27 @@
-# film-universe-timelines-engine
+# elsewhen
 
-The **engine** for Primer-style multi-universe timeline charts. Its job is one
-thing: to hold the story's universe structure as a **pure, presentation-agnostic
-abstract model** — *what* happens, not *how* it's drawn.
+The **abstract engine** for multi-universe / time-travel timeline charts. Its
+whole job is one thing: to hold a film's universe structure as a **pure,
+presentation-agnostic model** — *what* happens, never *how* it's drawn.
 
 - **Abstract core** (`abstract_model.py`, `abstract.schema.json`): worlds and
   their origins, events, splits (both tines + character fates), transfers, the
-  protagonist's route, fates, and citations. Structurally semantic, no glyphs,
+  protagonist's route, fates, and citations. Structurally semantic — no glyphs,
   colours, lanes, dash-styles, density, timescale, or layout ordering.
 - **Projections** (`projections.py`): render that model into *any* form —
   graphviz DOT, mermaid, markdown, plain text are built in. The PIL chart and
-  Studio GUI are just more projections; they live with the visual repo and read
-  the same abstract model. Swap the renderer, never touch the model.
-- **Import** (`to_abstract.py`): convert a legacy `schema_v2` document (or the
+  Studio GUI are just more projections, reading the same model. Swap the
+  renderer, never touch the model.
+- **Import** (`to_abstract.py`): convert a legacy `schema_v2` document (or a
   compiled story JSON) into the abstract model.
 
-The coupling boundary is the **abstract model**, not any drawing. The engine
-publishes it; every visual is a downstream projection of it.
+The coupling boundary is the **abstract model**, not any drawing.
 
 ## The abstract representation
 
 The model is a plain structure — worlds, events, splits, transfers, route,
-fates — all cited. It is the thing a chart is *about*. You can read it directly
-as text, or feed it to any projector.
+fates — all cited. It is the thing a chart is *about*. Read it as text, or feed
+it to any projector.
 
 ```
 THE WAIF — Ben's Story
@@ -48,7 +47,7 @@ Fates:  waif-u1 in U1 @ e-J  dead
 ## Usage
 
 ```bash
-# Convert a schema_v2 fixture into the abstract model
+# Convert a legacy schema_v2 fixture into the abstract model
 python3 to_abstract.py fixtures/bens_story.json                 # -> abstract JSON
 python3 to_abstract.py fixtures/bens_story.json --text          # -> abstract text
 python3 to_abstract.py fixtures/bens_story.json --dot           # -> graphviz DOT
@@ -71,18 +70,12 @@ projections.py        dot / mermaid / markdown projectors (+ dispatcher)
 to_abstract.py        schema_v2 -> abstract model importer + CLI
 verify_abstract.py    convert+validate+render harness for all fixtures
 
-schema_v2.json        legacy frozen data contract (import source)
-semantic_validate.py  legacy two-phase E-code validator
-timeline_compile.py   legacy allocation-txt -> story JSON authoring
-v23_adapter.py        legacy fixture -> v1 renderer doc
 fixtures/             6 film fixtures (the import corpus)
-tests/                12 negative E-code fixtures
-references/           chart-language, json-schema, method, redesign docs
-SPEC_v23.md           the v2.3 spec; REPORT/CHANGELOG/OPEN_ISSUES
+references/           chart-language.md + method.md (the ontology + method)
 ```
 
-## Provenance
-
-Spec by Astra (gpt-6-astra) via Experiential Labs; JSON schema by Claude Code
-(Pro). Committed on `sfingali`. The abstract core + projections are the
-presentation-agnostic layer on top.
+This is intentionally lean: abstract core + import corpus + the two ontology
+docs. The legacy v2.3 machinery (schema_v2.json, the E-code validator, the
+allocation compiler, the full SPEC) has been pruned from this repo — it lives on
+in the sibling visual repo `film-universe-timelines`, which owns the PIL renderer
+and Studio GUI.

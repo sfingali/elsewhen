@@ -24,9 +24,10 @@ This is the process used on THE WAIF; it generalises.
 
 4. One lane per universe the protagonist occupies. Order so each crossing hops
    exactly one lane left, opening universe rightmost.
-5. Write the allocation file (syntax in `tools/timeline_compile.py`): lane
-   ranges in scene numbers, `pulls:` = crossing scenes in story order,
-   `split:` = non-crossing forks, `key:` beats for anything that must appear.
+5. Write the allocation as the abstract model (JSON, `abstract.schema.json`) or,
+   to move an existing allocation into it, run `to_abstract.py FIXTURE.json`
+   (see README). The legacy `timeline_compile.py` allocation compiler is archived
+   in the sibling visual repo (`film-universe-timelines`).
 6. Compile; fix allocation errors (missing ranges, wrong pull count) — the
    compiler refuses to guess.
 
