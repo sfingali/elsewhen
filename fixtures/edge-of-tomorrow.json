@@ -1,0 +1,198 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "edge-of-tomorrow",
+  "interpretation_rules": null,
+  "validation_profile": "evidence_pending",
+  "meta": {
+    "title": "EDGE OF TOMORROW \u2014 The Verdun loop",
+    "subtitle": "One world looping on an external reset; memory only in the traveller",
+    "footer": "Iterations, not branching \u2014 the world is overwritten each cycle.",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "FILM \u2014 structural reading",
+      "kind": "canon_statement",
+      "text": "The day resets on Cage's death; he alone remembers; the loop ends when the Omega falls."
+    }
+  ],
+  "characters": [
+    {
+      "id": "cage",
+      "label": "Cage"
+    },
+    {
+      "id": "rita",
+      "label": "Rita"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "cage-mind",
+      "character": "cage",
+      "label": "Cage"
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "EOT",
+      "label": "Edge of Tomorrow"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "EOT",
+      "title": "The Verdun loop",
+      "universes": [
+        {
+          "id": "E",
+          "label": "The battle of Verdun",
+          "origin": {
+            "kind": "initial"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "cage-e",
+          "character": "cage",
+          "universe": "E",
+          "native_to_universe": true,
+          "provenance": "native",
+          "body": "cage-body"
+        },
+        {
+          "id": "rita-e",
+          "character": "rita",
+          "universe": "E",
+          "native_to_universe": true,
+          "provenance": "native"
+        }
+      ],
+      "events": [
+        {
+          "id": "e-start",
+          "kind": "start",
+          "universe": "E",
+          "story_order": 0,
+          "world_time": null,
+          "label": "The day resets \u2014 Cage wakes on the transport",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "The day resets \u2014 Cage wakes on the transport",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-die",
+          "kind": "split",
+          "universe": "E",
+          "story_order": 10,
+          "world_time": null,
+          "label": "He dies in combat \u2014 the Omega resets the day",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "He dies in combat \u2014 the Omega resets the day",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-alpha",
+          "kind": "outcome",
+          "universe": "E",
+          "story_order": 20,
+          "world_time": null,
+          "label": "Touched by the Alpha \u2014 only Cage keeps the loop memory",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Touched by the Alpha \u2014 only Cage keeps the loop memory",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "E",
+          "story_order": 30,
+          "world_time": null,
+          "label": "The loop breaks \u2014 the Omega is defeated",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "The loop breaks \u2014 the Omega is defeated",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [],
+      "merges": [],
+      "thread": {
+        "traveller": "cage-mind",
+        "visits": [
+          {
+            "id": "v1",
+            "traveller": "cage-mind",
+            "universe": "E",
+            "entry": "e-start",
+            "exit": "e-end",
+            "passes": []
+          }
+        ],
+        "links": []
+      },
+      "fates": [
+        {
+          "id": "f-cage",
+          "universe": "E",
+          "instance": "cage-e",
+          "event": "e-end",
+          "status": "alive"
+        },
+        {
+          "id": "f-rita",
+          "universe": "E",
+          "instance": "rita-e",
+          "event": "e-end",
+          "status": "alive"
+        }
+      ],
+      "segments": [],
+      "beats": [
+        {
+          "id": "b-loop",
+          "segment": "seg-e",
+          "story_order": 15,
+          "text": "The day repeats many times; only Cage's memory persists (iterations, external reset).",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "loop repetition",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "layout": {
+        "lane_order": [
+          "E"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "One world looping; no universe is created (history_model=iterations, overwrite).",
+        "The reset is external (the Omega's blood), not a willed branch.",
+        "Memory persists in the traveller only \u2014 every other actor resets."
+      ]
+    }
+  ]
+}

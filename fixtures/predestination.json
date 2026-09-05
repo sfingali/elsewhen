@@ -1,0 +1,188 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "predestination",
+  "interpretation_rules": null,
+  "validation_profile": "observation_only",
+  "meta": {
+    "title": "PREDESTINATION \u2014 The temporal agency loop",
+    "subtitle": "Single closed timeline, bootstrap self-ancestry",
+    "footer": "One lifetime observed as a closed loop; ontology undeclared.",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "FILM \u2014 structural reading",
+      "kind": "canon_statement",
+      "text": "A temporal-agent loop where the agent parents and partners themselves in one closed timeline."
+    }
+  ],
+  "characters": [
+    {
+      "id": "b",
+      "label": "The Bartender / Agent"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "b-mind",
+      "character": "b",
+      "label": "The Agent"
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "PRE",
+      "label": "Predestination"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "PRE",
+      "title": "The temporal agency loop",
+      "universes": [
+        {
+          "id": "T",
+          "label": "The closed timeline",
+          "origin": {
+            "kind": "initial"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "a-t",
+          "character": "b",
+          "universe": "T",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "b-t",
+          "character": "b",
+          "universe": "T",
+          "native_to_universe": true,
+          "provenance": "split_counterpart",
+          "body": "b-body"
+        }
+      ],
+      "events": [
+        {
+          "id": "e-start",
+          "kind": "start",
+          "universe": "T",
+          "story_order": 0,
+          "world_time": null,
+          "label": "The bartender's ordinary day",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "The bartender's ordinary day",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-meet",
+          "kind": "anchor",
+          "universe": "T",
+          "story_order": 10,
+          "world_time": null,
+          "label": "He meets the Unmarried Mother",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "He meets the Unmarried Mother",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-surgery",
+          "kind": "outcome",
+          "universe": "T",
+          "story_order": 20,
+          "world_time": null,
+          "label": "The surgery \u2014 he is 'the Unmarried Mother'",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "The surgery \u2014 he is 'the Unmarried Mother'",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-meet2",
+          "kind": "anchor",
+          "universe": "T",
+          "story_order": 30,
+          "world_time": null,
+          "label": "He is sent to meet his own past self",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "He is sent to meet his own past self",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "T",
+          "story_order": 40,
+          "world_time": null,
+          "label": "He takes the place of the bartender \u2014 the loop closes",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "He takes the place of the bartender \u2014 the loop closes",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [],
+      "transfers": [],
+      "merges": [],
+      "thread": {
+        "traveller": "b-mind",
+        "visits": [
+          {
+            "id": "v1",
+            "traveller": "b-mind",
+            "universe": "T",
+            "entry": "e-start",
+            "exit": "e-end",
+            "passes": []
+          }
+        ],
+        "links": []
+      },
+      "fates": [
+        {
+          "id": "f-b",
+          "universe": "T",
+          "instance": "a-t",
+          "event": "e-end",
+          "status": "alive"
+        }
+      ],
+      "segments": [],
+      "beats": [],
+      "layout": {
+        "lane_order": [
+          "T"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "Single closed timeline, no world fork.",
+        "Bootstrap self-ancestry: the protagonist is their own history and their own partner.",
+        "Ontology undeclared \u2014 the causation is self-referential (genealogy=bootstrap_cycles, observation_only)."
+      ]
+    }
+  ]
+}

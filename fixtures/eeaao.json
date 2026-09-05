@@ -1,0 +1,396 @@
+{
+  "schema_version": 2,
+  "specification_revision": "2.3",
+  "interpretation_profile": "eeaao",
+  "interpretation_rules": null,
+  "validation_profile": "evidence_pending",
+  "meta": {
+    "title": "EVERYTHING EVERYWHERE ALL AT ONCE \u2014 The verse-jump net",
+    "subtitle": "Coexisting multiverse, consciousness-hopped across parallel selves",
+    "footer": "Multiverse coexistence; consciousness transfer between already-running verses.",
+    "axis": "story_order"
+  },
+  "sources": [
+    {
+      "id": "canon",
+      "title": "FILM \u2014 structural reading",
+      "kind": "canon_statement",
+      "text": "Evelyn can absorb the lives of her parallel selves; every choice branches a verse; the Alpha world holds the verse-jump tech."
+    }
+  ],
+  "characters": [
+    {
+      "id": "evelyn",
+      "label": "Evelyn"
+    },
+    {
+      "id": "joy",
+      "label": "Joy / Jobu"
+    }
+  ],
+  "travellers": [
+    {
+      "id": "ev-e0",
+      "character": "evelyn",
+      "label": "Evelyn"
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "EE",
+      "label": "Everything Everywhere"
+    }
+  ],
+  "graphs": [
+    {
+      "namespace": "EE",
+      "title": "The verse-jump net",
+      "universes": [
+        {
+          "id": "E0",
+          "label": "The base verse \u2014 the laundromat",
+          "origin": {
+            "kind": "initial"
+          }
+        },
+        {
+          "id": "A",
+          "label": "The Alpha verse \u2014 where verse-jump tech was built",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "V1",
+          "label": "A parallel verse (the hot-dog-fingers world)",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        },
+        {
+          "id": "V2",
+          "label": "A comfort verse",
+          "origin": {
+            "kind": "preexisting",
+            "ancestry": "off_chart"
+          }
+        }
+      ],
+      "instances": [
+        {
+          "id": "ev-e0",
+          "character": "evelyn",
+          "universe": "E0",
+          "native_to_universe": true,
+          "provenance": "native"
+        },
+        {
+          "id": "ev-a",
+          "character": "evelyn",
+          "universe": "A",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "ev-v1",
+          "character": "evelyn",
+          "universe": "V1",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        },
+        {
+          "id": "ev-v2",
+          "character": "evelyn",
+          "universe": "V2",
+          "native_to_universe": false,
+          "provenance": "arrival"
+        }
+      ],
+      "events": [
+        {
+          "id": "e-start",
+          "kind": "start",
+          "universe": "E0",
+          "story_order": 0,
+          "world_time": null,
+          "label": "Evelyn at the laundromat before the IRS audit",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "Evelyn at the laundromat before the IRS audit",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-verse-ap",
+          "kind": "exit",
+          "universe": "E0",
+          "story_order": 10,
+          "world_time": null,
+          "label": "She learns to verse-jump into her parallel selves",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "She learns to verse-jump into her parallel selves",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-choice",
+          "kind": "split",
+          "universe": "E0",
+          "story_order": 20,
+          "world_time": null,
+          "label": "A decision that spawns a branch verse",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "A decision that spawns a branch verse",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-a",
+          "kind": "entry",
+          "universe": "A",
+          "story_order": 25,
+          "world_time": null,
+          "label": "She enters the Alpha verse",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "She enters the Alpha verse",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-v1",
+          "kind": "entry",
+          "universe": "V1",
+          "story_order": 30,
+          "world_time": null,
+          "label": "She hops into the hot-dog-fingers verse",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "She hops into the hot-dog-fingers verse",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-v2",
+          "kind": "entry",
+          "universe": "V2",
+          "story_order": 40,
+          "world_time": null,
+          "label": "She takes comfort in a quieter verse",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "She takes comfort in a quieter verse",
+            "status": "unavailable"
+          }
+        },
+        {
+          "id": "e-end",
+          "kind": "cutoff",
+          "universe": "E0",
+          "story_order": 50,
+          "world_time": null,
+          "label": "She chooses the googly-eyed family in the base verse",
+          "cite": {
+            "source": "canon",
+            "page": null,
+            "scene": null,
+            "locator": "She chooses the googly-eyed family in the base verse",
+            "status": "unavailable"
+          }
+        }
+      ],
+      "splits": [
+        {
+          "event": "e-choice",
+          "cause": "branch",
+          "automatic": true,
+          "traveller": "ev-e0",
+          "source_disposition": "continues",
+          "outcomes": {
+            "+": {
+              "universe": "E0",
+              "entry": "e-a",
+              "universe_outcome": "continues",
+              "character_outcomes": [
+                {
+                  "instance": "ev-e0",
+                  "outcome": "continues",
+                  "fate": "survives the choice"
+                }
+              ]
+            },
+            "-": {
+              "universe": "V1",
+              "entry": "e-v1",
+              "universe_outcome": "born",
+              "character_outcomes": [
+                {
+                  "instance": "ev-v1",
+                  "outcome": "dies",
+                  "fate": "that verse's Evelyn dies"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "transfers": [
+        {
+          "id": "t-ap",
+          "traveller": "ev-e0",
+          "from": {
+            "universe": "E0",
+            "exit": "e-verse-ap"
+          },
+          "to": {
+            "universe": "A",
+            "entry": "e-a"
+          },
+          "mechanism": "consciousness_transfer",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "t-hd",
+          "traveller": "ev-e0",
+          "from": {
+            "universe": "A",
+            "exit": "e-a"
+          },
+          "to": {
+            "universe": "V1",
+            "entry": "e-v1"
+          },
+          "mechanism": "consciousness_transfer",
+          "relation": {
+            "kind": "different_universes"
+          }
+        },
+        {
+          "id": "t-cf",
+          "traveller": "ev-e0",
+          "from": {
+            "universe": "V1",
+            "exit": "e-v1"
+          },
+          "to": {
+            "universe": "V2",
+            "entry": "e-v2"
+          },
+          "mechanism": "consciousness_transfer",
+          "relation": {
+            "kind": "different_universes"
+          }
+        }
+      ],
+      "merges": [],
+      "segments": [],
+      "thread": {
+        "traveller": "ev-e0",
+        "visits": [
+          {
+            "id": "v1",
+            "traveller": "ev-e0",
+            "universe": "E0",
+            "entry": "e-start",
+            "exit": "e-verse-ap",
+            "passes": []
+          },
+          {
+            "id": "v2",
+            "traveller": "ev-e0",
+            "universe": "A",
+            "entry": "e-a",
+            "exit": "e-a",
+            "passes": []
+          },
+          {
+            "id": "v3",
+            "traveller": "ev-e0",
+            "universe": "V1",
+            "entry": "e-v1",
+            "exit": "e-v1",
+            "passes": []
+          },
+          {
+            "id": "v4",
+            "traveller": "ev-e0",
+            "universe": "V2",
+            "entry": "e-v2",
+            "exit": "e-v2",
+            "passes": []
+          }
+        ],
+        "links": [
+          {
+            "from_visit": "v1",
+            "to_visit": "v2",
+            "kind": "transfer",
+            "transfer": "t-ap"
+          },
+          {
+            "from_visit": "v2",
+            "to_visit": "v3",
+            "kind": "transfer",
+            "transfer": "t-hd"
+          },
+          {
+            "from_visit": "v3",
+            "to_visit": "v4",
+            "kind": "transfer",
+            "transfer": "t-cf"
+          }
+        ]
+      },
+      "fates": [
+        {
+          "id": "f-ev",
+          "universe": "E0",
+          "instance": "ev-e0",
+          "event": "e-end",
+          "status": "alive"
+        },
+        {
+          "id": "f-joy",
+          "universe": "E0",
+          "instance": "ev-v1",
+          "event": "e-end",
+          "status": "alive"
+        }
+      ],
+      "beats": [],
+      "layout": {
+        "lane_order": [
+          "E0",
+          "A",
+          "V1",
+          "V2"
+        ],
+        "collapsed_universes": []
+      },
+      "assumptions": [
+        "Coexisting infinitude of verses; each choice forks a new verse (branch).",
+        "Verse-jump = consciousness transfer into a parallel self; the body stays.",
+        "Many actors (Evelyn, Waymond, Joy/Jobu) \u2014 Evelyn's thread charted here, others are separate graphs.",
+        "Alpha verse has no native Evelyn \u2014 arrival, not a born counterpart."
+      ]
+    }
+  ]
+}

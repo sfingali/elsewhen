@@ -23,9 +23,10 @@ never touches this repo.
 ## Profiles are parameter sets
 
 An interpretation **profile is not a magic string** — it is a bundle of semantic
-parameters. The name (`P1`, `P2`, `P3`, `P4`, `tenet`, `dark`, `steins-gate`) is
-just a convenience handle; the real contract is the expanded parameter set in
-`profile.params`.
+parameters. The name (`P1`, `P2`, `P3`, `P4`, `tenet`, `dark`, `steins-gate`,
+plus the diversity presets `eeaao`, `interstellar`, `edge-of-tomorrow`,
+`predestination`) is just a convenience handle; the real contract is the
+expanded parameter set in `profile.params`.
 
 ```json
 "profile": {
@@ -106,7 +107,7 @@ profiles.py           named profiles as parameter sets (+ resolve/overrides)
 to_abstract.py        schema_v2 -> abstract model importer + CLI
 verify_abstract.py    convert + validate harness for all fixtures
 
-fixtures/             6 film fixtures (the import corpus)
+fixtures/             10 film fixtures (the import corpus — incl. the 4 diversity films)
 references/           chart-language.md + method.md (the ontology + method)
 ```
 

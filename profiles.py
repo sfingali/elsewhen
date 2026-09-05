@@ -67,6 +67,32 @@ PROFILES = {
                         joined_worlds="preexist", turnstiles="none",
                         protagonist_scope="singular", axis="story_order",
                         validation="evidence_pending", merges="forbidden", genealogy="acyclic"),
+    # Diversity additions — each stresses parameter values the corpus lacked.
+    # eeaao: coexisting multiverse, consciousness-hopped across many parallel selves, many protagonists.
+    "eeaao": dict(DEFAULTS, history_model="universes", branching="branch",
+                  coexistence="coexisting", time_mechanics=["consciousness", "body"],
+                  joined_worlds="preexist", turnstiles="none",
+                  protagonist_scope="multiple", axis="story_order",
+                  validation="evidence_pending", merges="forbidden", genealogy="acyclic"),
+    # interstellar: signal transport to the past, deterministic self-consistent
+    # bootstrap (no world fork); causality is observed, not branched.
+    "interstellar": dict(DEFAULTS, history_model="universes", branching="undeclared",
+                         coexistence="undeclared", time_mechanics=["signal"],
+                         joined_worlds="undeclared", turnstiles="none",
+                         protagonist_scope="singular", axis="story_order",
+                         validation="observation_only", merges="forbidden", genealogy="bootstrap_cycles"),
+    # edge-of-tomorrow: one world looping on an external reset trigger; memory only in traveller.
+    "edge-of-tomorrow": dict(DEFAULTS, history_model="iterations", branching="overwrite",
+                             coexistence="single_active", time_mechanics=["memory"],
+                             joined_worlds="not_preexist", turnstiles="none",
+                             protagonist_scope="singular", axis="story_order",
+                             validation="evidence_pending", merges="forbidden", genealogy="acyclic"),
+    # predestination: single closed timeline, bootstrap self-ancestry; ontology undeclared.
+    "predestination": dict(DEFAULTS, history_model="universes", branching="undeclared",
+                           coexistence="undeclared", time_mechanics=["body", "memory"],
+                           joined_worlds="undeclared", turnstiles="none",
+                           protagonist_scope="singular", axis="story_order",
+                           validation="observation_only", merges="forbidden", genealogy="bootstrap_cycles"),
 }
 
 # Aliases for the rules/canon refinements that pick a preset + extra rules.
